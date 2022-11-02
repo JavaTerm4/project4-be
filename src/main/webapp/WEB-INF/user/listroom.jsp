@@ -41,7 +41,7 @@
 					</figure>
 					<div class="room-info">
 						<h3 class="room-title">
-							<a href="#url">Normal Room</a>
+							<a href="/room?roomType=Normal">Normal Room</a>
 						</h3>
 						<ul class="mb-3">
 							<li><span class="fa fa-users"></span> 2 Guests</li>
@@ -89,7 +89,7 @@
 					</figure>
 					<div class="room-info">
 						<h3 class="room-title">
-							<a href="#url">VIP Room</a>
+							<a href="/room?roomType=VIP">VIP Room</a>
 						</h3>
 						<ul class="mb-3">
 							<li><span class="fa fa-users"></span> 2-4 Customers</li>
@@ -136,7 +136,7 @@
 					</figure>
 					<div class="room-info">
 						<h3 class="room-title">
-							<a href="#url">Homestay Room</a>
+							<a href="/room?roomType=Homestay">Homestay Room</a>
 						</h3>
 						<ul class="mb-3">
 							<li><span class="fa fa-users"></span> 2-8 Customers</li>
