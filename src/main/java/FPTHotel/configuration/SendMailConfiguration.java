@@ -20,10 +20,8 @@ public class SendMailConfiguration {
 		javaMailSender.setPort(587);
 		javaMailSender.setProtocol("smtp");
 
-		//nhap username gmail
-		javaMailSender.setUsername("hpvodanh00@gmail.com");
-		//password gmail
-		javaMailSender.setPassword("0924220282");
+		javaMailSender.setUsername("peoplehubx@gmail.com");
+		javaMailSender.setPassword("sekctqflmopwmgho");
 		javaMailSender.setDefaultEncoding("UTF-8");
 
 		mailProperties.put("mail.smtp.auth", "true");

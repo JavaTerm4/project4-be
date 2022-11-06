@@ -169,13 +169,10 @@ public class HomeController {
         java.sql.Date sqlDate = java.sql.Date.valueOf(String.valueOf(bookingDTO.getCheckInDate()));
         java.sql.Date sqlDate1 = java.sql.Date.valueOf(String.valueOf(bookingDTO.getCheckOutDate()));
         CheckinCalendar checkinCalendar = new CheckinCalendar((int) (lichDatPhongService.countfindAll() + 1),
-
                 bookingDTO.getName(),
                 bookingDTO.getPhoneNumber(),
                 bookingDTO.getEmail(),
-
                 phong,
-
                 sqlDate,
                 sqlDate1
         );
