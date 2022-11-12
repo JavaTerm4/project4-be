@@ -72,7 +72,7 @@
 															  href="contact">Contact</a>
 					</li>
 				</ul>
-				<a href="booking" class="ml-3 book btn btn-secondary btn-style">Book
+				<a href="listroom" class="ml-3 book btn btn-secondary btn-style">Book
 					Now</a>
 			</div>
 		</div>

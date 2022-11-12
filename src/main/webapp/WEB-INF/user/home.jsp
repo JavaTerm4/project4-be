@@ -185,7 +185,7 @@
 						</ul>
 						<p>Room is equipped with modern and luxurious wooden furniture luxury. 
 						Bathroom with luxury bath: a bathtub and separate shower.</p>
-						<a href="booking" class="btn btn-style btn-primary mt-sm-4 mt-3">Book
+						<a href="listroom" class="btn btn-style btn-primary mt-sm-4 mt-3">Book
 							Now</a>
 					</div>
 				</div>
@@ -317,7 +317,7 @@
 		<div class="welcome-left text-center py-md-5 py-3">
 			<h3>Enjoy a Luxury experience. Discover our location. Relax and
 				enjoy your holiday</h3>
-			<a href="booking"
+			<a href="listroom"
 			   class="btn btn-style transparent-btn mt-sm-5 mt-4 mr-2">Book Now</a>
 			<a href="contact" class="btn btn-style btn-primary mt-sm-5 mt-4">Contact
 				Us</a>
