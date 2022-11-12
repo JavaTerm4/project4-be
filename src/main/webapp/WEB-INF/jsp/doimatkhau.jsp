@@ -46,32 +46,24 @@
 	  
 	  
 	   <frm:form action="actiondoimatkhau" modelAttribute="taikhoan">
-	   
+           <input type="hidden" name="tenDangNhap" id="tenDangNhap" class="form-control" value="${gettaikhoan.tenDangNhap }"/>
 	   <div class="form-group">
-		<label for="matkhaucu" style="font-weight: bold;">Old password:</label>
+		<label for="oldPass" style="font-weight: bold;">Old password:</label>
 		<div class="col-sm-10">
-			<input type="password" name="matkhaucu" id="matkhaucu" class="form-control" placeholder="Enter your current password" maxlength="100" required="required">
+			<input type="password" name="oldPass" id="oldPass" class="form-control" placeholder="Enter your current password" maxlength="100" required="required">
 		</div>
 	</div>
-	<frm:hidden path="tenDangNhap" value="${gettaikhoan.tenDangNhap }"/>
-	<frm:hidden path="hoTen" value="${gettaikhoan.hoTen }"/>
-	<frm:hidden path="gioiTinh" value="${gettaikhoan.gioiTinh }"/>
-	<frm:hidden path="ngaySinh" value="${gettaikhoan.ngaySinh }"/>
-	<frm:hidden path="cmnd" value="${gettaikhoan.cmnd }"/>
-	<frm:hidden path="soDT" value="${gettaikhoan.soDT }"/>
-	<frm:hidden path="email" value="${gettaikhoan.email }"/>
-	<frm:hidden path="chucVu.maChucVu" value="${gettaikhoan.chucVu.maChucVu }"/>
 	<div class="form-group">
-		<label for="matkhaumoi" style="font-weight: bold;">New password:</label>
+		<label for="newPass" style="font-weight: bold;">New password:</label>
 		<div class="col-sm-10">
-			<input type="password" name="matkhaumoi" id="matkhaumoi" class="form-control" placeholder="Enter your new password" maxlength="100" required="required" >
+			<input type="password" name="newPass" id="newPass" class="form-control" placeholder="Enter your new password" maxlength="100" required="required" >
 		</div>
 	</div>
 	  
              <div class="form-group">
-		<label for="xacnhanmatkhaumoi" style="font-weight: bold;">Confirm new password:</label>
+		<label style="font-weight: bold;">Confirm new password:</label>
 		<div class="col-sm-10">
-			<frm:input path="matKhau" type="password"  class="form-control" placeholder="Confirm new password" maxlength="100" required="required" ></frm:input>
+            <input type="password" name="cfPass" id="cfPass" class="form-control" placeholder="Enter your new password" maxlength="100" required="required" >
 		</div>
 	</div>
            

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import FPTHotel.Dto.ChangePassDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.ModelMap;
@@ -109,31 +110,30 @@ public class DangNhapController {
 
 	@RequestMapping("/actiondoimatkhau")
 	public String actiondoimatkhau(HttpServletRequest httpServletRequest, ModelMap model,
-	                               @ModelAttribute("taikhoan") Account taikhoan) {
-		String matkhaucu = httpServletRequest.getParameter("matkhaucu");
-		String matkhaumoi = httpServletRequest.getParameter("matkhaumoi");
-		matkhaucu = Common.encode(matkhaucu);
-		matkhaumoi = Common.encode(matkhaumoi);
-		taikhoan.setMatKhau(Common.encode(taikhoan.getMatKhau()));
+	                               @ModelAttribute("taikhoan") ChangePassDto taikhoan) {
+		String matkhaucu = Common.encode(taikhoan.getOldPass());
+		String matkhaumoi = Common.encode(taikhoan.getNewPass());
 		model.addAttribute("titlepage", "Change Password");
-		HttpSession session = httpServletRequest.getSession();
-		Account gettaikhoan = dangnhapservice.findById(session.getAttribute("nguoidung").toString()).get();
+		model.addAttribute("gettaikhoan", taikhoan);
+		Account gettaikhoan = dangnhapservice.findById(taikhoan.getTenDangNhap()).get();
 		if (!matkhaucu.equals(gettaikhoan.getMatKhau())) {
 			model.addAttribute("messageloi", "Current password is incorrect");
-			taikhoan.setMatKhau("");
+			taikhoan.setNewPass("");
 			return "doimatkhau";
-		} else if (!matkhaumoi.equals(taikhoan.getMatKhau())) {
+		} else if (!taikhoan.getNewPass().equals(taikhoan.getCfPass())) {
 			model.addAttribute("messageloi", "Confirm the new password is incorrect");
-			taikhoan.setMatKhau("");
+			taikhoan.setNewPass("");
 			return "doimatkhau";
 		} else if (matkhaumoi.length() < 9) {
-			taikhoan.setMatKhau("");
+			taikhoan.setNewPass("");
 			model.addAttribute("messageloi", "Password must be from 8 characters");
 			return "doimatkhau";
 		} else {
-			dangnhapservice.save(taikhoan);
+			gettaikhoan.setMatKhau(matkhaumoi);
+			dangnhapservice.save(gettaikhoan);
+			model.addAttribute("gettaikhoan", taikhoan);
 			model.addAttribute("message", "Password changed successfully");
-			taikhoan.setMatKhau("");
+			taikhoan.setNewPass("");
 			return "doimatkhau";
 		}
 	}
