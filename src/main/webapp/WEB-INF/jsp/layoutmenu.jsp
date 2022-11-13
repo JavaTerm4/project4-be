@@ -205,7 +205,9 @@
 
 						<li class="user-body">
 							<div style="text-align: center;">
-
+								<a class="hoverUser" href="${nguoidung}">Profile</a>
+							</div>
+							<div style="text-align: center;">
 								<a class="hoverUser" href="doimatkhau">Change Password</a>
 							</div>
 

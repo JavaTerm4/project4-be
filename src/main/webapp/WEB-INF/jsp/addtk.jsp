@@ -77,7 +77,7 @@
 					<label for="CMND" style="font-weight: bold;">Identity card:</label>
 					<div class="col-sm-10">
 						<frm:input type="number" id="CMND" class="form-control"
-							path="cmnd" placeholder="Enter your identity card number" oninput="checkMaxLenghtNumber(this,20)"/>
+							path="cmnd" placeholder="Enter your identity card number" oninput="checkMaxLenghtNumber(this,12)"/>
 					</div>
 				</div>
 
@@ -85,7 +85,7 @@
 					<label for="soDT" style="font-weight: bold;">Phone number:</label>
 					<div class="col-sm-10">
 						<frm:input type="number" id="soDT" class="form-control"
-							path="soDT" placeholder="Enter your phone number" oninput="checkMaxLenghtNumber(this,15)"/>
+							path="soDT" placeholder="Enter your phone number" oninput="checkMaxLenghtNumber(this,10)"/>
 					</div>
 				</div>
 

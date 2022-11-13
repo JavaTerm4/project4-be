@@ -1,13 +1,12 @@
 package FPTHotel.Controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
+import FPTHotel.Dto.UpdateProfileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.PageRequest;
@@ -16,10 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import FPTHotel.Common.Common;
 import FPTHotel.Model.Account;
@@ -38,12 +34,12 @@ public class TaikhoanController {
 	
 	@Autowired
 	ITaikhoanServices iTaikhoanServices;
-	
+
 	@ModelAttribute(name = "changeURL")
 	public String changeURL() {
 		return "qltk";
 	}
-	
+
 	@RequestMapping("/qltk")
 	public String listtk(ModelMap model, @ModelAttribute("taikhoan") Account taikhoan) {
 		PageRequest pageable = PageRequest.of(0, 10);
@@ -54,6 +50,40 @@ public class TaikhoanController {
 		model.addAttribute("lTaikhoans", ltk); 
 		model.addAttribute("listSoLuongTrang", listSoLuongTrang(iTaikhoanServices.countFindAllTk(), model));// số lượng các button chọn trang
 		return "qltk"; // Tên trang index
+	}
+
+	@GetMapping("/{userId}")
+	public String profile(ModelMap model, @PathVariable String userId) {
+		activemenu(model);
+		Optional<Account> account = iTaikhoanServices.findById(userId);
+		if (account.isPresent()) {
+			model.addAttribute("activedstk", null);
+			model.addAttribute("titlepage", "Profile");
+			model.addAttribute("account", account.get());
+			return "profile";
+		}
+		return "redirect:/";
+	}
+
+	@RequestMapping("UpdateProfile")
+	public String updateProfile(ModelMap model, @ModelAttribute("account") UpdateProfileDto account) {
+		activemenu(model);
+		model.addAttribute("activedstk", null);
+		model.addAttribute("titlepage", "Update Profile");
+		Account accountOrigin = iTaikhoanServices.findById(account.getTenDangNhap()).get();
+		accountOrigin.setHoTen(account.getHoTen());
+		accountOrigin.setGioiTinh(account.getGioiTinh());
+		accountOrigin.setNgaySinh(account.getNgaySinh());
+		accountOrigin.setCmnd(account.getCmnd());
+		accountOrigin.setSoDT(account.getSoDT());
+		accountOrigin.setEmail(account.getEmail());
+		iTaikhoanServices.save(accountOrigin);
+
+		model.addAttribute("activedstk", null);
+		model.addAttribute("titlepage", "Profile");
+		model.addAttribute("account", accountOrigin);
+		model.addAttribute("message", "Update profile successfully");
+		return "profile";
 	}
 
 	@RequestMapping("/edittk")
