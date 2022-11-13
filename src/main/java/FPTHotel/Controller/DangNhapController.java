@@ -76,6 +76,7 @@ public class DangNhapController {
 			session.setAttribute("nguoidung", tendangnhap);
 			session.setAttribute("chucvu", l.get(0).getChucVu().getMaChucVu() + "");// 1 giam doc 2 nhan vien
 			if (l.get(0).getChucVu().getMaChucVu() == 3) {
+				session.setAttribute("khach", "Yes");
 				return "redirect:/";
 			} else {
 				return "redirect:/dptp";
