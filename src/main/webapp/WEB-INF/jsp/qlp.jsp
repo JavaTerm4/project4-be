@@ -112,27 +112,27 @@
 
 					<style>
 #myImg ${u .maPhong
-	
+
 }
 
 {
 border-radius
 :
- 
+
 5px
 ;
 
-    
+
 cursor
 :
- 
+
 pointer
 ;
 
-    
+
 transition
 :
- 
+
 0
 .3s
 ;
@@ -140,7 +140,7 @@ transition
 
 }
 #myImg ${u .maPhong
-	
+
 }
 
 :hover {
@@ -149,76 +149,76 @@ transition
 
 /* The Modal (background) */
 .modal ${u .maPhong
-	
+
 }
 
 {
 display
 :
- 
+
 none
 ; /* Hidden by default */
 
-    
+
 position
 :
- 
+
 fixed
 ; /* Stay in place */
 
-    
+
 z-index
 :
- 
+
 99
 ; /* Sit on top */
 
-    
+
 padding-top
 :
- 
+
 100px
 ; /* Location of the box */
 
-    
+
 left
 :
- 
+
 0
 ;
 
-    
+
 top
 :
- 
+
 0
 ;
 
-    
+
 width
 :
- 
+
 100
 %; /* Full width */
 
-    
+
 height
 :
- 
+
 100
 %; /* Full height */
 
-    
+
 overflow
 :
- 
+
 auto
 ; /* Enable scroll if needed */
 
-    
+
 background-color
 :
- 
+
 rgb
 (
 0
@@ -229,10 +229,10 @@ rgb
 )
 ; /* Fallback color */
 
-    
+
 background-color
 :
- 
+
 rgba
 (
 0
@@ -251,7 +251,7 @@ rgba
 
 /* Modal Content (image) */
 .modal ${u .maPhong
-	
+
 }
 
 -content {
@@ -263,64 +263,64 @@ rgba
 
 /* Caption of Modal Image */
 #caption ${u .maPhong
-	
+
 }
 
 {
 margin
 :
- 
+
 auto
 ;
 
-    
+
 display
 :
- 
+
 block
 ;
 
-    
+
 width
 :
- 
+
 80
 %;
 
-    
+
 max-width
 :
- 
+
 700px
 ;
 
-    
+
 text-align
 :
- 
+
 center
 ;
 
-    
+
 color
 :
- 
+
 #ccc
 ;
 
-    
+
 padding
 :
- 
+
 10px
- 
+
 0
 ;
 
-    
+
 height
 :
- 
+
 150px
 ;
 
@@ -329,39 +329,39 @@ height
 
 /* Add Animation */
 .modal ${u .maPhong
-	
+
 }
 
 -content, #caption ${u .maPhong
-	
+
 }
 
 {
 -webkit-animation-name
 :
- 
+
 zoom
 ;
 
-    
+
 -webkit-animation-duration
 :
- 
+
 0
 .6s
 ;
 
-    
+
 animation-name
 :
- 
+
 zoom
 ;
 
-    
+
 animation-duration
 :
- 
+
 0
 .6s
 ;
@@ -391,55 +391,55 @@ to {
 
 /* The Close Button */
 .close ${u .maPhong
-	
+
 }
 
 {
 position
 :
- 
+
 absolute
 ;
 
-    
+
 top
 :
- 
+
 15px
 ;
 
-    
+
 right
 :
- 
+
 35px
 ;
 
-    
+
 color
 :
- 
+
 #f1f1f1
 ;
 
-    
+
 font-size
 :
- 
+
 40px
 ;
 
-    
+
 font-weight
 :
- 
+
 bold
 ;
 
-    
+
 transition
 :
- 
+
 0
 .3s
 ;
@@ -447,11 +447,11 @@ transition
 
 }
 .close ${u .maPhong
-	
+
 }
 
 :hover, .close ${u .maPhong
-	
+
 }
 
 :focus {
@@ -489,7 +489,7 @@ img.onclick = function(){
 
 var span = document.getElementsByClassName("close${u.maPhong}")[0];
 
-span.onclick = function() { 
+span.onclick = function() {
     modal.style.display = "none";
 }
 </script>
@@ -587,7 +587,7 @@ span.onclick = function() {
    <c:if test="${u.tienNghi.contains('Television')}">document.getElementById("tivi${u.maPhong }").checked = true;</c:if>
    <c:if test="${u.tienNghi.contains('Hot and cold water')}">document.getElementById("nuocnonglanh${u.maPhong }").checked = true;</c:if>
    <c:if test="${u.tienNghi.contains('Nice view')}">document.getElementById("vitritot${u.maPhong }").checked = true;</c:if>
-   
+
 
 </script>
 										</div>
@@ -751,7 +751,7 @@ span.onclick = function() {
 
 
 	<script>
-	 $(function () {        
+	 $(function () {
     $('#file').change(function () {
 
         //because this is single file upload I use only first index

@@ -96,149 +96,36 @@
 
 
 					<style>
-#myImg ${u .maPhong
-	
+#myImg ${u .maPhong}{
+border-radius:5px;
+cursor:pointer;
+transition:0.3s;
 }
-
-{
-border-radius
-:
- 
-5px
-;
-
-    
-cursor
-:
- 
-pointer
-;
-
-    
-transition
-:
- 
-0
-.3s
-;
-
-
-}
-#myImg ${u .maPhong
-	
-}
-
+#myImg ${u .maPhong	}
 :hover {
 	opacity: 0.7;
 }
 
 /* The Modal (background) */
-.modal ${u .maPhong
-	
-}
-
+.modal ${u .maPhong}
 {
-display
-:
- 
-none
-; /* Hidden by default */
-
-    
-position
-:
- 
-fixed
-; /* Stay in place */
-
-    
-z-index
-:
- 
-99
-; /* Sit on top */
-
-    
-padding-top
-:
- 
-100px
-; /* Location of the box */
-
-    
-left
-:
- 
-0
-;
-
-    
-top
-:
- 
-0
-;
-
-    
-width
-:
- 
-100
-%; /* Full width */
-
-    
-height
-:
- 
-100
-%; /* Full height */
-
-    
-overflow
-:
- 
-auto
-; /* Enable scroll if needed */
-
-    
-background-color
-:
- 
-rgb
-(
-0
-,
-0
-,
-0
-)
-; /* Fallback color */
-
-    
-background-color
-:
- 
-rgba
-(
-0
-,
-0
-,
-0
-,
-0
-.9
-)
-; /* Black w/ opacity */
+display:none; /* Hidden by default */
 
 
+position:fixed; /* Stay in place */
+z-index: 99;
+padding-top: 100px; /* Location of the box */
+left: 0;
+top:0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color:rgba(0,0,0,0.9); /* Black w/ opacity */
 }
 
 /* Modal Content (image) */
-.modal ${u .maPhong
-	
-}
-
+.modal ${u .maPhong}
 -content {
 	margin: auto;
 	display: block;
@@ -247,196 +134,51 @@ rgba
 }
 
 /* Caption of Modal Image */
-#caption ${u .maPhong
-	
-}
-
+#caption ${u .maPhong}
 {
-margin
-:
- 
-auto
-;
-
-    
-display
-:
- 
-block
-;
-
-    
-width
-:
- 
-80
-%;
-
-    
-max-width
-:
- 
-700px
-;
-
-    
-text-align
-:
- 
-center
-;
-
-    
-color
-:
- 
-#ccc
-;
-
-    
-padding
-:
- 
-10px
- 
-0
-;
-
-    
-height
-:
- 
-150px
-;
-
-
+margin: auto;
+display: block;
+width: 80%;
+max-width: 700px;
+text-align: center;
+color: #ccc;
+padding: 10px 0;
+height: 150px;
 }
 
 /* Add Animation */
-.modal ${u .maPhong
-	
-}
+.modal ${u .maPhong}
 
--content, #caption ${u .maPhong
-	
-}
-
+-content, #caption ${u .maPhong}
 {
--webkit-animation-name
-:
- 
-zoom
-;
-
-    
--webkit-animation-duration
-:
- 
-0
-.6s
-;
-
-    
-animation-name
-:
- 
-zoom
-;
-
-    
-animation-duration
-:
- 
-0
-.6s
-;
-
-
+-webkit-animation-name: zoom;
+-webkit-animation-duration: 0.6s;
+animation-name: zoom;
+animation-duration: 0.6s;
 }
-@
--webkit-keyframes zoom {
-	from {-webkit-transform: scale(0)
+@-webkit-keyframes zoom {
+	from {-webkit-transform: scale(0)}
+	to {-webkit-transform: scale(1)}
 }
-
-to {
-	-webkit-transform: scale(1)
-}
-
-}
-@
-keyframes zoom {
-	from {transform: scale(0)
-}
-
-to {
-	transform: scale(1)
-}
-
+@keyframes zoom {
+	from {transform: scale(0)}
+	to {transform: scale(1)}
 }
 
 /* The Close Button */
-.close ${u .maPhong
-	
-}
-
+.close ${u .maPhong}
 {
-position
-:
- 
-absolute
-;
-
-    
-top
-:
- 
-15px
-;
-
-    
-right
-:
- 
-35px
-;
-
-    
-color
-:
- 
-#f1f1f1
-;
-
-    
-font-size
-:
- 
-40px
-;
-
-    
-font-weight
-:
- 
-bold
-;
-
-    
-transition
-:
- 
-0
-.3s
-;
-
-
+position: absolute;
+top: 15px;
+right: 35px;
+color: #f1f1f1;
+font-size: 40px;
+font-weight: bold;
+transition: 0.3s;
 }
-.close ${u .maPhong
-	
-}
+.close ${u .maPhong}
 
 :hover, .close ${u .maPhong
-	
 }
 
 :focus {

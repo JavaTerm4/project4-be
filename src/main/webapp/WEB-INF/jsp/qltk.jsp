@@ -209,7 +209,7 @@
 												<option value="2"
 												${u.chucVu.maChucVu == 2?"selected='selected'":"" }>Staff</option>
 											<option value="3"
-												${u.chucVu.maChucVu == 2?"selected='selected'":"" }>User</option>
+												${u.chucVu.maChucVu == 3?"selected='selected'":"" }>User</option>
 										</frm:select>
 									</div>
 								</div>
