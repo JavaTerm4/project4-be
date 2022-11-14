@@ -71,9 +71,19 @@
 					<li class="nav-item @@contact__active"><a class="nav-link"
 															  href="contact">Contact</a>
 					</li>
+
+				<%
+					if(session.getAttribute("khach") != null){
+				%>
+					<li class="nav-item @@contact__active"><a class="nav-link" style="color: #f57b51; font-weight: bold; font-size: 16px"
+															  href="">WELCOME USER</a>
+					</li>
 				</ul>
-				<a href="listroom" class="ml-3 book btn btn-secondary btn-style">Book
-					Now</a>
+				<% } else { %>
+				</ul>
+					<a href='login' class='ml-3 book btn btn-secondary btn-style'>Login</a>
+				<% }  %>
+
 			</div>
 		</div>
 	</nav>
