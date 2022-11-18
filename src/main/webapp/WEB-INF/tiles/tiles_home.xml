@@ -52,5 +52,8 @@
 	<definition name="success" extends="emtyTemplate">
 		<put-attribute name="content" value="/WEB-INF/user/success.jsp"></put-attribute>
 	</definition>
+	<definition name="register" extends="emtyTemplate">
+		<put-attribute name="content" value="/WEB-INF/user/register.jsp"></put-attribute>
+	</definition>
 
 </tiles-definitions>
