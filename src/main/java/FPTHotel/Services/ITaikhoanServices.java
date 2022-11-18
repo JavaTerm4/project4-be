@@ -9,7 +9,9 @@ import org.springframework.data.repository.CrudRepository;
 import FPTHotel.Model.Account;
 
 public interface ITaikhoanServices extends CrudRepository<Account, String> {
-	
+
+	Account findByUsername(String username);
+
 	@Query("select tk from Account tk")
 	public List<Account> findAllTk(PageRequest pageRequest);
 	
