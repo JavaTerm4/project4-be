@@ -2,7 +2,9 @@ package FPTHotel.Controller.api;
 
 import FPTHotel.Common.Common;
 import FPTHotel.Dto.LoginDto;
+import FPTHotel.Dto.RegisterDto;
 import FPTHotel.Model.Account;
+import FPTHotel.Model.Position;
 import FPTHotel.Services.ITaikhoanServices;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,16 +39,25 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Account account) {
-        Account accountQuery = iTaikhoanServices.findByUsername(account.getTenDangNhap());
+    public ResponseEntity<?> register(@RequestBody RegisterDto dto) {
+        Account accountQuery = iTaikhoanServices.findByUsername(dto.getUsername());
         if (!Objects.isNull(accountQuery)) {
             return ResponseEntity.badRequest().body("Username is exist");
         }
-        account.setMatKhau(Common.encode(account.getMatKhau()));
-        Date today = new Date();
-        account.setNgayTao(today);
-        account.setGioTao(today);
-        return ResponseEntity.ok(dangnhapservice.save(account));
+        Account account = new Account();
+        account.setTenDangNhap(dto.getUsername());
+        account.setHoTen(dto.getFullName());
+        account.setMatKhau(Common.encode(dto.getPassword()));
+        account.setSoDT(dto.getPhoneNumber());
+        account.setEmail(dto.getEmail());
+        account.setGioiTinh(dto.getGender());
+        account.setNgaySinh(dto.getBirthday());
+        account.setCmnd("000000000");
+        Position p = new Position();
+        p.setMaChucVu(3);
+        account.setChucVu(p);
+        dangnhapservice.save(account);
+        return ResponseEntity.ok("Register success");
     }
 
 }

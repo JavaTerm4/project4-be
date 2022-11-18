@@ -2,20 +2,14 @@ package FPTHotel.Model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.ObjectUtils;
 
 
 @Entity
@@ -50,8 +44,6 @@ public class Account {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "position_id ")
 	private Position position ;
-
-
 	public Date getNgayTao() {
 		return dateSet;
 	}
@@ -138,6 +130,14 @@ public class Account {
 
 	public void setChucVu(Position chucVu) {
 		this.position = chucVu;
+	}
+
+	@PrePersist
+	public void onCreate() {
+		if(ObjectUtils.isEmpty(dateSet)) {
+			dateSet = new Date();
+		}
+		timeSet = new java.util.Date();
 	}
 
 }
