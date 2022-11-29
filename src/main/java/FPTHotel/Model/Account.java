@@ -30,7 +30,7 @@ public class Account {
 	@NotNull(message = "- The date of birth cannot be empty")
 	@Past(message = "- Birth date must be in the past")
 	private Date birthday;
-//	@NotBlank(message = "- Identification number cannot be empty")
+	@NotBlank(message = "- Identification number cannot be empty")
 	private String identityCard;
 	@Length(min = 9, max = 15, message = "- invalid phone number")
 	@NotBlank(message = "- Phone number cannot be empty")
@@ -41,17 +41,9 @@ public class Account {
 	private Date dateSet;
 	@DateTimeFormat(pattern = "HH:mm")
 	private java.util.Date timeSet;
-
-	private Date createdDate;
-	private String createdBy;
-	private Date updatedDate;
-	private String updatedBy;
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "position_id ")
 	private Position position ;
-
-
 	public Date getNgayTao() {
 		return dateSet;
 	}
@@ -146,38 +138,6 @@ public class Account {
 			dateSet = new Date();
 		}
 		timeSet = new java.util.Date();
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Date getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
 	}
 
 }
