@@ -103,7 +103,7 @@
 				<% } else { %>
 				</ul>
 					<a href='login' class='ml-3 book btn btn-secondary btn-style'>Login</a>
-					<a href='login' class='ml-3 book btn btn-info btn-style'>Register</a>
+					<a href='register' class='ml-3 book btn btn-info btn-style'>Register</a>
 				<% }  %>
 
 			</div>

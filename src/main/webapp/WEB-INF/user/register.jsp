@@ -11,15 +11,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
 	<!-- MDB -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" rel="stylesheet"/>
-	<style>
-	form-outline .form-control {
-		min-height: auto;
-		padding: 0.32rem 0.75rem;
-		border: 1px solid;
-		background: transparent;
-		transition: all .2s linear;
-	}
-	</style>
+	<link rel="stylesheet" href="css/register.css">
 </head>
 <body>
 <section class="vh-100 bg-image"
@@ -29,7 +21,7 @@
 			<div class="row d-flex justify-content-center align-items-center h-100">
 				<div class="col-12 col-md-9 col-lg-7 col-xl-6">
 					<div class="card" style="border-radius: 15px;">
-						<div class="card-body p-5">
+						<div class="card-body p-5 register-page">
 							<h2 class="text-uppercase text-center mb-5">Register</h2>
 
 							<form:form action="/action-register" modelAttribute="taikhoan" class="book-depature-6 signin-form" method="post">
