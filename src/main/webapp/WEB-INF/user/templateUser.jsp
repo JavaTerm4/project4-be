@@ -75,13 +75,35 @@
 				<%
 					if(session.getAttribute("khach") != null){
 				%>
-					<li class="nav-item @@contact__active"><a class="nav-link" style="color: #f57b51; font-weight: bold; font-size: 16px"
-															  href="">WELCOME USER</a>
+					<li class="dropdown user user-menu" style="margin-right: 35px;">
+						<a href="#" class="dropdown-toggle customUser" style="color: #f57b51; font-weight: bold; font-size: 16px"
+						   data-toggle="dropdown" aria-expanded="false"> <img
+								src="hinh/iconuser.png" width="30px" height="30px" /> <span
+								class="hidden-xs">Welcome ${nguoidung }</span>
+						</a>
+
+						<ul class="dropdown-menu">
+
+							<li class="user-body" style="color: #0275d8; font-size: 15px;">
+								<div class="mt-2" style="text-align: center;">
+									<a class="hoverUser" style="color: #0275d8;" href="${nguoidung}">Profile</a>
+								</div>
+								<div class="mt-2" style="text-align: center;">
+									<a class="hoverUser" style="color: #0275d8;" href="doimatkhau">Change Password</a>
+								</div>
+
+								<div class="mt-2" style="text-align: center;">
+									<a class="hoverUser" style="color: #0275d8;" href="dangxuat">Log-Out</a>
+								</div>
+							</li>
+						</ul>
 					</li>
+
 				</ul>
 				<% } else { %>
 				</ul>
 					<a href='login' class='ml-3 book btn btn-secondary btn-style'>Login</a>
+					<a href='register' class='ml-3 book btn btn-info btn-style'>Register</a>
 				<% }  %>
 
 			</div>
@@ -109,7 +131,7 @@
 						<li><a href="tel:+84 905187775"><span
 								class="fa fa-phone"></span> +84 123 456 789</a></li>
 						<li><a href="mailto:hotel@fpt.edu.vn" class="mail"><span
-								class="fa fa-envelope-open-o"></span>Hotel@fpt.edu.vn</a></li>
+								class="fa fa-envelope-open-o"></span>BambuuHotel@fpt.edu.vn</a></li>
 					</ul>
 				</div>
 				<div
@@ -144,14 +166,14 @@
 						class="col-lg-3 col-md-6 col-sm-5 footer-list-29 footer-3 mt-lg-0 mt-5">
 					<h6 class="footer-title-29">Bank</h6>
 					<div class="footer-post mb-4">
-						<p class="small">Bank <strong>SACOMBANK</strong> Gia Lai Branch</p>
-						<p class="small">Holder: TRAN THANH HAI</p>
-						<p class="small">Account Number: 040070102007</p>
+						<p class="small">Bank <strong>SACOMBANK</strong> HO CHI MINH Branch</p>
+						<p class="small">Holder: HOANG HUU NGHIA</p>
+						<p class="small">Account Number: 0123456789123</p>
 					</div>
 					<div class="footer-post">
-						<p class="small">Bank <strong>SACOMBANK</strong> TX.GO CONG Branch</p>
-						<p class="small">Holder: VO NGUYEN HOANG QUAN</p>
-						<p class="small">Account Number: 070111671611</p>
+						<p class="small">Bank <strong>SACOMBANK</strong> HO CHI MINH Branch</p>
+						<p class="small">Holder: HOANG HUU NGHIA</p>
+						<p class="small">Account Number: 0123456789123</p>
 					</div>
 				</div>
 			</div>
