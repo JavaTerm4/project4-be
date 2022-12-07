@@ -35,7 +35,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="u" items="${lqldv}">
+            <c:forEach var="u" items="${listBook}">
                 <tr>
                     <td>1</td>
                     <td>${u.getSoPhong()}</td>
@@ -47,9 +47,51 @@
                     <td>${u.getTienThuePhong()}</td>
                     <td>${u.getTienCoc()}</td>
                     <td><a href="usdtbkin"><button type="button" class="btn btn-dark">Details</button></a></td>
-                    <td><button type="button" class="btn btn-dark">Edit</button></td>
+                    <td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModalsua${u.maDatPhong}">Edit</button></td>
                     <td><button type="button" class="btn btn-dark" >Cancel</button></td>
                 </tr>
+
+<%--                <div class="modal fade" id="myModalsua${u.maDatPhong }"--%>
+<%--                     role="dialog">--%>
+<%--                    <div class="modal-dialog">--%>
+<%--                        <!-- Modal content-->--%>
+<%--                        <div class="modal-content">--%>
+<%--                            <div class="modal-header">--%>
+<%--                                <h4 class="modal-title">--%>
+<%--                                    Edit Book ID <strong>${u.maDatPhong }</strong>--%>
+<%--                                </h4>--%>
+<%--                                <button type="button" class="close" data-dismiss="modal">&times;</button>--%>
+<%--                            </div>--%>
+<%--                            <frm:form action="editlp" modelAttribute="loaiphong">--%>
+<%--                                <frm:hidden path="maDatPhong" value="${u.maDatPhong }" />--%>
+<%--                                <div class="modal-body">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="tenLoaiPhong" style="font-weight: bold;">Room--%>
+<%--                                            type name:</label>--%>
+<%--                                        <div class="col-sm-10">--%>
+<%--                                            <frm:input id="tenLoaiPhong" class="form-control"--%>
+<%--                                                       path="tenLoaiPhong" placeholder="Enter room type name"--%>
+<%--                                                       value="${u.tenLoaiPhong }" maxlength="100" />--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="moTa" style="font-weight: bold;">Description:</label>--%>
+<%--                                        <div class="col-sm-10">--%>
+<%--                                            <frm:input id="moTa" class="form-control" path="moTa"--%>
+<%--                                                       placeholder="Enter description" value="${u.moTa }" maxlength="250" />--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+
+<%--                                </div>--%>
+
+<%--                                <div class="modal-footer">--%>
+<%--                                    <frm:button class="btn btn-warning">--%>
+<%--                                        <i class="fa fa-edit"></i>Update</frm:button>--%>
+<%--                                </div>--%>
+<%--                            </frm:form>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </c:forEach>
             </tbody>
         </table>

@@ -91,7 +91,10 @@ public class PageController {
 			bookingDTO.setRoomType(phong.getLoaiPhong().getTenLoaiPhong());
 			model.addAttribute("show", true);
 
+		} else {
+			return "redirect:/listroom";
 		}
+
 		model.addAttribute("roomCode", phong.getMaPhong());
 		model.addAttribute("roomNumber", phong.getSoPhong());
 		model.addAttribute("roomPrice", phong.getGiaPhong());

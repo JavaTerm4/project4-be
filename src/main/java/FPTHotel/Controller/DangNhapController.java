@@ -66,7 +66,6 @@ public class DangNhapController {
 	                             @RequestParam("username") String tendangnhap, @RequestParam("password") String matkhau) {
 		matkhau = Common.encode(matkhau);
 		List<Account> l = dangnhapservice.findUser(tendangnhap, matkhau);
-
 		if (l.isEmpty()) {
 			checklogin = 1;
 			return "redirect:/login";
@@ -76,7 +75,6 @@ public class DangNhapController {
 			session.setAttribute("nguoidung", tendangnhap);
 			session.setAttribute("chucvu", l.get(0).getChucVu().getMaChucVu() + "");// 1 giam doc 2 nhan vien
 			if (l.get(0).getChucVu().getMaChucVu() == 3) {
-				session.setAttribute("khach", "Yes");
 				return "redirect:/";
 			} else {
 				return "redirect:/dptp";

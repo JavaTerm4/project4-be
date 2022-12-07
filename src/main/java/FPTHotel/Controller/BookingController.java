@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -21,10 +23,12 @@ public class BookingController {
 	BookingServices bookingServices;
 
 	@GetMapping("/book-history")
-	public String bookHistoryPage(ModelMap model){
-		List<Booking> l = bookingServices.findByOrderByMaDatPhongDesc();
+	public String bookHistoryPage(HttpServletRequest httpServletRequest, ModelMap model){
+		HttpSession session = httpServletRequest.getSession();
+		String user = session.getAttribute("nguoidung").toString();
+		List<Booking> l = bookingServices.findByCreatedBy(user);
 
-		model.addAttribute("lqldv", l);
+		model.addAttribute("listBook", l);
 		return "book-history";
 	}
 

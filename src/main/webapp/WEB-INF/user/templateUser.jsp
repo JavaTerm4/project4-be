@@ -73,7 +73,7 @@
 					</li>
 
 				<%
-					if(session.getAttribute("khach") != null){
+					if("1".equals(session.getAttribute("chucvu")) || "2".equals(session.getAttribute("chucvu"))){
 				%>
 					<li class="dropdown user user-menu" style="margin-right: 35px;">
 						<a href="#" class="dropdown-toggle customUser" style="color: #f57b51; font-weight: bold; font-size: 16px"
@@ -85,6 +85,9 @@
 						<ul class="dropdown-menu">
 
 							<li class="user-body" style="color: #0275d8; font-size: 15px;">
+								<div class="mt-2" style="text-align: center;">
+									<a class="hoverUser" style="color: #0275d8;" href="dptp">Management</a>
+								</div>
 								<div class="mt-2" style="text-align: center;">
 									<a class="hoverUser" style="color: #0275d8;" href="${nguoidung}">Profile</a>
 								</div>
@@ -100,11 +103,39 @@
 					</li>
 
 				</ul>
+				<%
+					} else if("3".equals(session.getAttribute("chucvu"))){
+				%>
+				<li class="dropdown user user-menu" style="margin-right: 35px;">
+					<a href="#" class="dropdown-toggle customUser" style="color: #f57b51; font-weight: bold; font-size: 16px"
+					   data-toggle="dropdown" aria-expanded="false"> <img
+							src="hinh/iconuser.png" width="30px" height="30px" /> <span
+							class="hidden-xs">Welcome ${nguoidung }</span>
+					</a>
+
+					<ul class="dropdown-menu">
+
+						<li class="user-body" style="color: #0275d8; font-size: 15px;">
+							<div class="mt-2" style="text-align: center;">
+								<a class="hoverUser" style="color: #0275d8;" href="${nguoidung}">Profile</a>
+							</div>
+							<div class="mt-2" style="text-align: center;">
+								<a class="hoverUser" style="color: #0275d8;" href="doimatkhau">Change Password</a>
+							</div>
+
+							<div class="mt-2" style="text-align: center;">
+								<a class="hoverUser" style="color: #0275d8;" href="dangxuat">Log-Out</a>
+							</div>
+						</li>
+					</ul>
+				</li>
+
+				</ul>
 				<% } else { %>
 				</ul>
 					<a href='login' class='ml-3 book btn btn-secondary btn-style'>Login</a>
 					<a href='register' class='ml-3 book btn btn-info btn-style'>Register</a>
-				<% }  %>
+				<% } %>
 
 			</div>
 		</div>
