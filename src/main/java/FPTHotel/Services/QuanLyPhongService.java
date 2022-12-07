@@ -38,6 +38,8 @@ public interface QuanLyPhongService extends CrudRepository<Room, Integer> {
 
 	public Room getByMaPhong(int maPhong);
 
+	public Room getBySoPhong(int soPhong);
+
 	public Room getByGiaPhong(double giaPhong);
 
 }

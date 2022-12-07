@@ -78,7 +78,8 @@ public class PageController {
 		model.addAttribute("bookingDTO", bookingDTO);
 		return "booking";
 	}
-	
+
+	/*
 	@RequestMapping(value = "/bookingroom", method = RequestMethod.GET)
 	public String bookingroom(@Param("roomCode") Integer roomCode, Model model) {
 
@@ -118,6 +119,8 @@ public class PageController {
 	public String invoice() {
 		return "invoice";
 	}
+
+	 */
 
 
 }
