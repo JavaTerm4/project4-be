@@ -31,9 +31,17 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto account) {
-        List<Account> accounts = dangnhapservice.findUser(account.getUsername(), account.getPassword());
+        List<Account> accounts = dangnhapservice.findUser(account.getUsername(), Common.encode(account.getPassword()));
         if (accounts.size() > 0) {
-            return ResponseEntity.ok(accounts.get(0));
+            Account account1 = accounts.get(0);
+            RegisterDto accountDTO = new RegisterDto();
+            accountDTO.setUsername(account1.getTenDangNhap());
+            accountDTO.setFullName(account1.getHoTen());
+            accountDTO.setGender(account1.getGioiTinh());
+            accountDTO.setBirthday(account1.getNgaySinh());
+            accountDTO.setPhoneNumber(account1.getSoDT());
+            accountDTO.setEmail(account1.getEmail());
+            return ResponseEntity.ok(accountDTO);
         }
         return ResponseEntity.badRequest().body("Username or password is incorrect");
     }
