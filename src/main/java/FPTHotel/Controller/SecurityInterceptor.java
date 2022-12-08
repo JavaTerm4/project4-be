@@ -31,7 +31,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 				   || request.getServletPath().equalsIgnoreCase("/addqlp" )|| request.getServletPath().equalsIgnoreCase("/qlp")
 				   || request.getServletPath().equalsIgnoreCase("/addlp") || request.getServletPath().equalsIgnoreCase("/dsqldv")
 				   || request.getServletPath().equalsIgnoreCase( "/qllp") || request.getServletPath().equalsIgnoreCase("/themdsqldv")
-				   || request.getServletPath().equalsIgnoreCase("/dptp")){
+				   || request.getServletPath().equalsIgnoreCase("/dptp") || request.getServletPath().equalsIgnoreCase("/bookingroom")){
 				response.sendRedirect(request.getContextPath() + "/login");
 				return false;
 			}

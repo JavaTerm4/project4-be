@@ -23,19 +23,18 @@
 								<div class="hny-frm_grid">
 									<h5>Name</h5>
 									<form:input path="name" name="name" type="text"
-										placeholder="Your Name" required=""></form:input>
+										placeholder="Your Name" required="required"></form:input>
 								</div>
 								<div class="hny-frm_grid">
 									<h5>Phone Number</h5>
 									<form:input path="phoneNumber" name="phoneNumber" type="text"
-										placeholder="Phone Number" required=""></form:input>
+										placeholder="Phone Number" required="required"></form:input>
 								</div>
 								<div class="hny-frm_grid">
 									<h5>Email</h5>
 									<form:input path="email" name="email" type="email"
-										placeholder="Email" required=""></form:input>
+										placeholder="Email" required="required"></form:input>
 								</div>
-								<c:if test="${show}">
 									<div class="hny-frm_grid">
 										<h5>Room number</h5>
 										<input value="${roomNumber}" name="roomNumber" type="number"
@@ -51,18 +50,17 @@
 										<input value="${bookingDTO.roomType}" name="roomType" type="text"
 											   readonly="true"  required="" />
 									</div>
-								</c:if>
 								<div class="hny-frm_grid">
 									<h5>Check-in Date</h5>
 									<form:input id="checkInDate" path="checkInDate"
 										name="checkInDate" type="date" placeholder="Check-in Date"
-										required=""></form:input>
+										required="required"></form:input>
 								</div>
 								<div class="hny-frm_grid">
 									<h5>Check-out Date</h5>
 									<form:input id="checkOutDate" path="checkOutDate"
 										name="checkOutDate" type="date" placeholder="Check-out Date"
-										required=""></form:input>
+										required="required"></form:input>
 									<form:input path="roomCode" name="roomCode" type="hidden"
 										placeholder="Room ID"></form:input>
 								</div>
@@ -90,13 +88,13 @@
 						<h5>Check-in Date</h5>
 						<input id="checkinBooked" path="checkinBooked"
 									name="checkinBooked" type="date" value="${checkinBooked}"
-									required=""></input>
+									required="required"></input>
 					</div>
 					<div class="hny-frm_grid">
 						<h5>Check-out Date</h5>
 						<input id="checkoutBooked" path="checkoutBooked"
 									name="checkoutBooked" type="date" value="${checkoutBooked}"
-									required=""></input>
+									required="required"></input>
 						<input path="roomNumber" name="roomNumber" type="hidden"
 									value="${roomNumber}" required></input>
 					</div>
