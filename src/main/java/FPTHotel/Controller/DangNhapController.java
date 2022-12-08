@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import FPTHotel.Dto.ChangePassDto;
+import FPTHotel.Dto.RegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.ModelMap;
@@ -71,6 +72,15 @@ public class DangNhapController {
 			return "redirect:/login";
 		} else {
 			HttpSession session = httpServletRequest.getSession();
+			Account account = l.get(0);
+			RegisterDto accountDTO = new RegisterDto();
+			accountDTO.setUsername(account.getTenDangNhap());
+			accountDTO.setFullName(account.getHoTen());
+			accountDTO.setGender(account.getGioiTinh());
+			accountDTO.setBirthday(account.getNgaySinh());
+			accountDTO.setPhoneNumber(account.getSoDT());
+			accountDTO.setEmail(account.getEmail());
+			session.setAttribute("account", accountDTO);
 			saveLichSuDangNhap(tendangnhap);
 			session.setAttribute("nguoidung", tendangnhap);
 			session.setAttribute("chucvu", l.get(0).getChucVu().getMaChucVu() + "");// 1 giam doc 2 nhan vien

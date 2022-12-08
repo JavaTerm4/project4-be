@@ -23,17 +23,17 @@
 								<div class="hny-frm_grid">
 									<h5>Name</h5>
 									<form:input path="name" name="name" type="text"
-										placeholder="Your Name" required="required"></form:input>
+										placeholder="Your Name" required="required" value="${account.fullName}"></form:input>
 								</div>
 								<div class="hny-frm_grid">
 									<h5>Phone Number</h5>
 									<form:input path="phoneNumber" name="phoneNumber" type="text"
-										placeholder="Phone Number" required="required"></form:input>
+										placeholder="Phone Number" required="required" value="${account.phoneNumber}"></form:input>
 								</div>
 								<div class="hny-frm_grid">
 									<h5>Email</h5>
 									<form:input path="email" name="email" type="email"
-										placeholder="Email" required="required"></form:input>
+										placeholder="Email" required="required" value="${account.email}"></form:input>
 								</div>
 									<div class="hny-frm_grid">
 										<h5>Room number</h5>
