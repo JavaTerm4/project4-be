@@ -104,6 +104,7 @@ public class PageController {
 		model.addAttribute("bookingDTO", bookingDTO);
 		return "bookingroom";
 	}
+	*/
 
 	@RequestMapping(value = "listroom", method = RequestMethod.GET)
 	public String listroom() {
@@ -120,7 +121,6 @@ public class PageController {
 		return "invoice";
 	}
 
-	 */
 
 
 }
