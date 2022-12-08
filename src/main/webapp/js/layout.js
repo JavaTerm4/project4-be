@@ -16,7 +16,7 @@ function clickHideParamURL(href) {
 }
 
 function setMinHeightContent() {
-	$(".content-custom").css('min-height', ($("#getFullSize").height() - 60) + "px");
+	$(".content-custom").css('min-height', "950px");
 }
 hideLink();
 setMinHeightContent();
