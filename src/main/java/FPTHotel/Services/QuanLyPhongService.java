@@ -1,5 +1,6 @@
 package FPTHotel.Services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +13,20 @@ import FPTHotel.Model.Room;
 
 
 public interface QuanLyPhongService extends CrudRepository<Room, Integer> {
+
+	@Query("select p " +
+			"from Room p " +
+			"         inner join RoomType r " +
+			"                    on p.maLoaiPhong = r.maLoaiPhong " +
+			"where r.tenLoaiPhong = :typeRoom " +
+			"  and p.giaPhong <= :maxPrice " +
+			"  and p.soPhong not in (select b.soPhong " +
+			"                         from Booking b " +
+			"                         where ((b.checkinDuKien between :checkin and :checkout) " +
+			"                             or (b.checkoutDuKien between :checkin and :checkout))" +
+			"						  group by b.soPhong)")
+	List<Room> findValidRoom(Date checkin, Date checkout, String typeRoom, double maxPrice);
+
 	@Query("SELECT p FROM Room p WHERE p.soPhong = ?1 or p.tang = ?1")
 	public List<Room> TimMaPhong(int id, PageRequest pageRequest);
 	
