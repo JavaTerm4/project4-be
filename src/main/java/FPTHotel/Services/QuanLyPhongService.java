@@ -23,7 +23,8 @@ public interface QuanLyPhongService extends CrudRepository<Room, Integer> {
 			"  and p.soPhong not in (select b.soPhong " +
 			"                         from Booking b " +
 			"                         where ((b.checkinDuKien between :checkin and :checkout) " +
-			"                             or (b.checkoutDuKien between :checkin and :checkout)))")
+			"                             or (b.checkoutDuKien between :checkin and :checkout))" +
+			"						  group by b.soPhong)")
 	List<Room> findValidRoom(Date checkin, Date checkout, String typeRoom, double maxPrice);
 
 	@Query("SELECT p FROM Room p WHERE p.soPhong = ?1 or p.tang = ?1")
