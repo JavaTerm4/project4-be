@@ -21,8 +21,9 @@ public class Room {
 	private Integer tang;
 	private String tienNghi;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="maLoaiPhong")
+	@JoinColumn(name="maLoaiPhong",  insertable = false, updatable = false)
 	private RoomType loaiPhong;
+	private int maLoaiPhong;
 	
 	private String hinhAnh;
 	@NotNull(message="- Prices cannot be empty")
@@ -45,7 +46,14 @@ public class Room {
 	@OneToMany(mappedBy="room", fetch = FetchType.LAZY)
 	private Collection<CheckinCalendar> lichDatPhongs;
 
-	
+	public int getMaLoaiPhong() {
+		return maLoaiPhong;
+	}
+
+	public void setMaLoaiPhong(int maLoaiPhong) {
+		this.maLoaiPhong = maLoaiPhong;
+	}
+
 	public Collection<CheckinCalendar> getLichDatPhongs() {
 		return lichDatPhongs;
 	}
