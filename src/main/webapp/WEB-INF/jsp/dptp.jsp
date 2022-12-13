@@ -5,12 +5,16 @@
 <style>
 .class-thao-tac {
 	text-decoration: none;
+	font-size: 20px;
+	font-weight: bolder;
+	letter-spacing: 1px;
 }
 
 .class-thao-tac:hover {
+	color: #f8a660;
 	text-decoration: none;
-	text-shadow: 1px 1px 1px #888888;
-	font-weight: bold;
+	text-shadow: 1px 1px 1px #f57b51;
+
 }
 
 .hovera {
@@ -144,12 +148,12 @@ width: 100%;
 							<div class="hovera itemdptp"
 								onclick="showThaoTac(${u.maPhong})"
 							>
-								<c:if test="${u.countDatLich > 0 }">
-									<img style="-webkit-filter: drop-shadow(1px 1px 2px #888888); filter: drop-shadow(1px 1px 2px #888888); z-index: 9999; position: absolute;" src='hinh/calendaricon.png' width="40px"
-										height="40px"
-									>
-									<span style="position: absolute; z-index: 9999; margin-top: 13px;color: cornflowerblue;text-align: center;font-weight: 1000;width: 40px;height: 26px;"><b>${u.countDatLich}</b></span>
-								</c:if>
+<%--								<c:if test="${u.countDatLich > 0 }">--%>
+<%--									<img style="-webkit-filter: drop-shadow(1px 1px 2px #888888); filter: drop-shadow(1px 1px 2px #888888); z-index: 9999; position: absolute;" src='hinh/calendaricon.png' width="40px"--%>
+<%--										height="40px"--%>
+<%--									>--%>
+<%--									<span style="position: absolute; z-index: 9999; margin-top: 13px;color: cornflowerblue;text-align: center;font-weight: 1000;width: 40px;height: 26px;"><b>${u.countDatLich}</b></span>--%>
+<%--								</c:if>--%>
 								<img class="icondptp"
 									src='<c:if test="${u.trangThai==0 }">hinh/homegreen.png</c:if><c:if test="${u.trangThai==1 }">hinh/homered.png</c:if><c:if test="${u.trangThai==2 }">hinh/homecam.png</c:if>'>
 								<div id="thongtin-${u.maPhong}" class="thongtin ${u.trangThai==2?'thongtintt2':'thongtinttk2'}">
@@ -178,30 +182,27 @@ width: 100%;
 								</div>
 								<div id="thaotac-${u.maPhong}" class="thaotac">
 									<c:if test="${u.trangThai==0}">
-										<div>
-											<a class="class-thao-tac" href="actionclickdptp?maPhong=${u.maPhong }&trangThai=${u.trangThai }&soPhong=${u.soPhong }">Rented normal</a>
+										<div class="mb-1">
+											<a class="class-thao-tac" href="staying?soPhong=${u.soPhong }">Staying</a>
 										</div>
 										<div>
-											<a class="class-thao-tac" href="homestay?maPhong=${u.maPhong }&trangThai=${u.trangThai }&soPhong=${u.soPhong }">HomeStay</a>
-										</div>
-										<div>
-											<a class="class-thao-tac" href="dslichdatphong?maPhong=${u.maPhong }&soPhong=${u.soPhong }">Book</a>
+											<a class="class-thao-tac" href="dsdpt?soPhong=${u.soPhong }">Booking</a>
 										</div>
 									</c:if>
 									<c:if test="${u.trangThai==1}">
-										<div>
-											<a class="class-thao-tac" href="actionclickdptp?maPhong=${u.maPhong }&trangThai=${u.trangThai }&soPhong=${u.soPhong }">Rented normal</a>
+										<div class="mb-1">
+											<a class="class-thao-tac" href="staying?soPhong=${u.soPhong }">Staying</a>
 										</div>
 										<div>
-											<a class="class-thao-tac" href="dslichdatphong?maPhong=${u.maPhong }&soPhong=${u.soPhong }">Book</a>
+											<a class="class-thao-tac" href="dsdpt?soPhong=${u.soPhong }">Booking</a>
 										</div>
 									</c:if>
 									<c:if test="${u.trangThai==2}">
-										<div>
-											<a class="class-thao-tac" href="homestay?maPhong=${u.maPhong }&trangThai=${u.trangThai }&soPhong=${u.soPhong }">Homestay</a>
+										<div class="mb-1">
+											<a class="class-thao-tac" href="staying?soPhong=${u.soPhong }">Staying</a>
 										</div>
 										<div>
-											<a class="class-thao-tac" href="dslichdatphong?maPhong=${u.maPhong }&soPhong=${u.soPhong }">Book</a>
+											<a class="class-thao-tac" href="dsdpt?soPhong=${u.soPhong }">Booking</a>
 										</div>
 									</c:if>
 								</div>

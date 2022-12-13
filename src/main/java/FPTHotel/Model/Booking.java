@@ -29,9 +29,11 @@ public class Booking{
 	private Date checkoutThuc;
 	private Double tienThuePhong;
 	private Double tienCoc;
+	private Double tienDichVu;
 	private Timestamp createdDate;
 	private String createdBy;
 	private Timestamp updatedDate;
 	private String updatedBy;
+	private Double tongTien;
 
 }

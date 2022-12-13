@@ -57,6 +57,8 @@ public class TkdtController {
 	public String tkdt(ModelMap model) {
 		activemenu(model);
 		model.addAttribute("titlepage", "Revenue statistic");
+		return "redirect:/recpay";
+		/*
 		double tongTienDatPhong = 0;
 		double tongTienDichVu = 0;
 		List<Checkout> lTraPhong = (List<Checkout>) iTraPhong.findAll();
@@ -71,7 +73,7 @@ public class TkdtController {
 
 		model.addAttribute("tongTien", tongTienDatPhong);
 		model.addAttribute("tongTienDichVu", tongTienDichVu);
-		
+
 		List<Collect> lThuChi = thuChiService.getThuChi();
 		tongTienThu = 0D;
 		tongTienChi = 0D;
@@ -86,6 +88,8 @@ public class TkdtController {
 		model.addAttribute("tongTienChi", tongTienChi);
 		model.addAttribute("disableA", true);
 		return "tkdt";
+
+		 */
 	}
 
 	@RequestMapping("/timtkdt")
