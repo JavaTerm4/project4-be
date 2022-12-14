@@ -55,5 +55,8 @@
 	<definition name="register" extends="emtyTemplate">
 		<put-attribute name="content" value="/WEB-INF/user/register.jsp"></put-attribute>
 	</definition>
+	<definition name="book-history" extends="templateUser">
+		<put-attribute name="content" value="/WEB-INF/user/booking-history.jsp"></put-attribute>
+	</definition>
 
 </tiles-definitions>

@@ -47,7 +47,7 @@
                                 ${room.loaiPhong.tenLoaiPhong}
                             </h3>
                             <p>${room.tienNghi}</p>
-                            <a href="/bookingroom?roomCode=${room.maPhong}" class="btn mt-sm-4 mt-3"
+                            <a href="/bookingroom?roomNumber=${room.soPhong}" class="btn mt-sm-4 mt-3"
                                style="color: orange;">Book Now</a>
                             <div class="room-info-bottom">
                                 <ul class="room-amenities">

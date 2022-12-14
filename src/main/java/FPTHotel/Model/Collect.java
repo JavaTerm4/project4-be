@@ -23,8 +23,25 @@ public class Collect {
 	private java.util.Date collectTime;
 	private Double money;
 	private String username;
+	private Integer bookingId;
+	private String description;
 
-	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(Integer bookingId) {
+		this.bookingId = bookingId;
+	}
+
 	public Integer getLoaiThuChi() {
 		return collectType;
 	}

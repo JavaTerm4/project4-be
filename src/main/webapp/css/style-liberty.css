@@ -12867,7 +12867,18 @@ button.btn-contact:hover {
 /* / contact1-responsive */
 /* /contact1 */
 .w3l-booking-top .grid-columns3 {
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  background: #fff;
+  border: 1px solid #d2dae2;
+  grid-gap: 30px;
+  padding: 15px 20px;
+  margin-bottom: 30px; }
+
+/* / contact1-responsive */
+/* /contact1 */
+.w3l-booking-top .grid-columns4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   display: grid;
   background: #fff;
   border: 1px solid #d2dae2;
@@ -13087,7 +13098,7 @@ button.btn-contact:hover {
 
 @media (max-width: 1280px) {
   .w3l-booking-top .grid-columns3 {
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     display: grid;
     grid-gap: 20px;
     padding: 15px 20px; }

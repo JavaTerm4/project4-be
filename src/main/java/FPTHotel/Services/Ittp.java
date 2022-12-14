@@ -3,6 +3,7 @@ package FPTHotel.Services;
 import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -42,4 +43,11 @@ public interface Ittp extends CrudRepository<Room, Integer> {
 	
 	@Query(value = "select count(0) from checkin dp where dp.ma_phong = ?1 and dp.loai_dat = 'homestay' AND dp.ma_dat_phong not in (select ma_dat_phong from checkout)", nativeQuery = true)
 	public Integer countHomestayByMaPhong(Integer maPhong);
+
+	@Query("SELECT p.soPhong FROM Room p order by p.soPhong ASC")
+	public List<Integer> getAllSoPhong();
+
+	@Modifying
+	@Query("UPDATE Room r set r.trangThai = ?1 where r.soPhong = ?2")
+	public void updatetrangThaiRoom(int trangThai, int soPhong);
 }

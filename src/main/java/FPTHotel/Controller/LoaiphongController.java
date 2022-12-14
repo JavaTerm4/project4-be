@@ -592,7 +592,7 @@ public class LoaiphongController {
 		} catch (Exception x) {
 			dataint = null;
 		}
-		ltim = (List<RoomType>) iLoaiphongServices.ListFindtdnOrName(dataint, data);
+		ltim = iLoaiphongServices.ListFindtdnOrName(dataint, data);
 		model.addAttribute("data", data);
 		
 		model.addAttribute("lLoaiphongs", phantranglptim(vitrihientai, ltim));

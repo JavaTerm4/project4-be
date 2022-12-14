@@ -78,7 +78,8 @@ public class PageController {
 		model.addAttribute("bookingDTO", bookingDTO);
 		return "booking";
 	}
-	
+
+	/*
 	@RequestMapping(value = "/bookingroom", method = RequestMethod.GET)
 	public String bookingroom(@Param("roomCode") Integer roomCode, Model model) {
 
@@ -91,7 +92,10 @@ public class PageController {
 			bookingDTO.setRoomType(phong.getLoaiPhong().getTenLoaiPhong());
 			model.addAttribute("show", true);
 
+		} else {
+			return "redirect:/listroom";
 		}
+
 		model.addAttribute("roomCode", phong.getMaPhong());
 		model.addAttribute("roomNumber", phong.getSoPhong());
 		model.addAttribute("roomPrice", phong.getGiaPhong());
@@ -100,6 +104,7 @@ public class PageController {
 		model.addAttribute("bookingDTO", bookingDTO);
 		return "bookingroom";
 	}
+	*/
 
 	@RequestMapping(value = "listroom", method = RequestMethod.GET)
 	public String listroom() {
@@ -115,6 +120,7 @@ public class PageController {
 	public String invoice() {
 		return "invoice";
 	}
+
 
 
 }
