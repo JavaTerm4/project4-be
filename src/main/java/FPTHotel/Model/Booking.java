@@ -14,7 +14,10 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "booking")
 public class Booking{
 	@Id

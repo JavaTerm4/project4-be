@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/book")
 @AllArgsConstructor
-public class BookingController {
+public class BookingApiController {
 
     @Autowired
     QuanLyPhongService quanLyPhongService;
@@ -32,7 +32,7 @@ public class BookingController {
         Date checkinDate = formatter.parse(checkin);
         Date checkoutDate = formatter.parse(checkout);
         List<Room> rooms = quanLyPhongService.findValidRoom(checkinDate, checkoutDate, typeRoom, maxPrice);
-        List<RoomDto> roomDtos = rooms.stream().map(room -> {
+        List<RoomDto> roomDtos = rooms.stream().map(room -> {   
             RoomDto roomDto = new RoomDto();
             roomDto.setMaPhong(room.getMaPhong());
             roomDto.setGiaPhong(room.getGiaPhong());
