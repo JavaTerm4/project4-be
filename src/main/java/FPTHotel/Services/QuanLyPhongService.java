@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import FPTHotel.Model.Room;
+import java.util.Optional;
 
 
 
@@ -26,6 +27,12 @@ public interface QuanLyPhongService extends CrudRepository<Room, Integer> {
 			"                             or (b.checkoutDuKien between :checkin and :checkout))" +
 			"						  group by b.soPhong)")
 	List<Room> findValidRoom(Date checkin, Date checkout, String typeRoom, double maxPrice);
+        
+        @Query("select p " + "from Room p " + "inner join RoomType r " + "on p.maLoaiPhong = r.maLoaiPhong " +
+			"where p.soPhong not in " +  "(select b.soPhong " + "from Booking b " + 
+                        "where ((b.checkinDuKien between :checkin and :checkout) " +
+			"or (b.checkoutDuKien between :checkin and :checkout)) " + "group by b.soPhong)")
+	List<Room> findValidRoomDeafult(Date checkin, Date checkout);
 
 	@Query("SELECT p FROM Room p WHERE p.soPhong = ?1 or p.tang = ?1")
 	public List<Room> TimMaPhong(int id, PageRequest pageRequest);
@@ -56,5 +63,12 @@ public interface QuanLyPhongService extends CrudRepository<Room, Integer> {
 	public Room getBySoPhong(int soPhong);
 
 	public Room getByGiaPhong(double giaPhong);
+        
+	@Query("select p " +
+			"from Room p " +
+			"         inner join RoomType r " +
+			"                    on p.maLoaiPhong = r.maLoaiPhong " +
+			"where p.maPhong = :maPhong ")
+        public List<Room> getByRoomId(int maPhong);
 
 }

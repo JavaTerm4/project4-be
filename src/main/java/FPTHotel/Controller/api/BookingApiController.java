@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,5 +55,62 @@ public class BookingApiController {
             return roomDto;
         }).collect(Collectors.toList());
        return ResponseEntity.ok(roomDtos);
+    }
+
+    @GetMapping("/room")
+    public ResponseEntity<?> roomList() throws ParseException{
+        Calendar calendar = Calendar.getInstance();
+        Date checkinDate = calendar.getTime();
+        calendar.add(Calendar.DATE, +10);
+        Date checkoutDate = calendar.getTime();
+        List<Room> rooms = quanLyPhongService.findValidRoomDeafult(checkinDate, checkoutDate);
+        List<RoomDto> roomDtos = rooms.stream().map(room -> {
+            RoomDto roomDto = new RoomDto();
+            roomDto.setMaPhong(room.getMaPhong());
+            roomDto.setGiaPhong(room.getGiaPhong());
+            roomDto.setSoPhong(room.getSoPhong());
+            roomDto.setTang(room.getTang());
+            roomDto.setTrangThai(room.getTrangThai());
+
+            RoomTypeDto roomTypeDto = new RoomTypeDto();
+            roomTypeDto.setMaLoaiPhong(room.getLoaiPhong().getMaLoaiPhong());
+            roomTypeDto.setTenLoaiPhong(room.getLoaiPhong().getTenLoaiPhong());
+            roomTypeDto.setMoTa(room.getLoaiPhong().getMoTa());
+
+            roomDto.setLoaiPhong(roomTypeDto);
+            roomDto.setGiaPhongGioDau(room.getGiaPhongGioDau());
+            roomDto.setHinhAnh("/hinh/phong/"+room.getHinhAnh());
+            roomDto.setKhuyenMai(room.getKhuyenMai());
+            roomDto.setTienNghi(room.getTienNghi());
+            roomDto.setGiaPhongGioSau(room.getGiaPhongGioSau());
+            return roomDto;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(roomDtos);
+    }
+    @GetMapping("/room/{id}")
+    public ResponseEntity<?> roomById(@PathVariable int id){
+        List<Room> rooms = quanLyPhongService.getByRoomId(id);
+        List<RoomDto> roomDtos = rooms.stream().map(room -> {
+            RoomDto roomDto = new RoomDto();
+            roomDto.setMaPhong(room.getMaPhong());
+            roomDto.setGiaPhong(room.getGiaPhong());
+            roomDto.setSoPhong(room.getSoPhong());
+            roomDto.setTang(room.getTang());
+            roomDto.setTrangThai(room.getTrangThai());
+
+            RoomTypeDto roomTypeDto = new RoomTypeDto();
+            roomTypeDto.setMaLoaiPhong(room.getLoaiPhong().getMaLoaiPhong());
+            roomTypeDto.setTenLoaiPhong(room.getLoaiPhong().getTenLoaiPhong());
+            roomTypeDto.setMoTa(room.getLoaiPhong().getMoTa());
+
+            roomDto.setLoaiPhong(roomTypeDto);
+            roomDto.setGiaPhongGioDau(room.getGiaPhongGioDau());
+            roomDto.setHinhAnh("/hinh/phong/"+room.getHinhAnh());
+            roomDto.setKhuyenMai(room.getKhuyenMai());
+            roomDto.setTienNghi(room.getTienNghi());
+            roomDto.setGiaPhongGioSau(room.getGiaPhongGioSau());
+            return roomDto;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(roomDtos);
     }
 }
