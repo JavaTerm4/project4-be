@@ -3,6 +3,7 @@ package FPTHotel.Controller.api;
 import FPTHotel.Dto.RoomDto;
 import FPTHotel.Dto.RoomTypeDto;
 import FPTHotel.Model.Room;
+import FPTHotel.Services.BookingServices;
 import FPTHotel.Services.QuanLyPhongService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,19 @@ public class BookingApiController {
     @Autowired
     QuanLyPhongService quanLyPhongService;
 
+    @Autowired
+    BookingServices bookingServices;
+
     @GetMapping("/search-available")
     public ResponseEntity<?> searchAvailable(@RequestParam("checkin") String checkin,
-                                  @RequestParam("checkout") String checkout,
-                                  @RequestParam("typeRoom") String typeRoom,
-                                  @RequestParam("maxPrice") double maxPrice) throws ParseException {
+                                             @RequestParam("checkout") String checkout,
+                                             @RequestParam("typeRoom") String typeRoom,
+                                             @RequestParam("maxPrice") double maxPrice) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date checkinDate = formatter.parse(checkin);
         Date checkoutDate = formatter.parse(checkout);
         List<Room> rooms = quanLyPhongService.findValidRoom(checkinDate, checkoutDate, typeRoom, maxPrice);
-        List<RoomDto> roomDtos = rooms.stream().map(room -> {   
+        List<RoomDto> roomDtos = rooms.stream().map(room -> {
             RoomDto roomDto = new RoomDto();
             roomDto.setMaPhong(room.getMaPhong());
             roomDto.setGiaPhong(room.getGiaPhong());
@@ -54,7 +58,14 @@ public class BookingApiController {
             roomDto.setGiaPhongGioSau(room.getGiaPhongGioSau());
             return roomDto;
         }).collect(Collectors.toList());
-       return ResponseEntity.ok(roomDtos);
+        return ResponseEntity.ok(roomDtos);
+    }
+
+    @RequestMapping(value = "/checkBooking", method = RequestMethod.GET)
+    public ResponseEntity<?> checkBooking(@RequestParam("checkin") java.sql.Date checkin,
+                                          @RequestParam("checkout") java.sql.Date checkout,
+                                          @RequestParam("room") int room) {
+        return ResponseEntity.ok(bookingServices.getAvailableForRoom(room, checkin, checkout));
     }
 
     @GetMapping("/room")
