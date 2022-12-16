@@ -9,9 +9,10 @@
 <body align="center" style="color: yellowgreen">
 <h1>Paid Successfull</h1>
 <h2>Thank for your payment</h2>
-<h4>Payper: ${bookingDTO.name}</h4>
-<h4>Room: ${phong.loaiPhong.tenLoaiPhong} ${phong.soPhong}</h4>
-<h4>Total: ${phong.giaPhong}$</h4>
+<h4>Payper: ${booking.hoTen}</h4>
+<h4>Room: ${booking.soPhong}</h4>
+<h4>Deposit: ${booking.tienCoc}</h4>
+<h4>Total: ${booking.tienThuePhong}$</h4>
 <a style="color: red" href="home">GO HOME</a>
 </body>
 </html>

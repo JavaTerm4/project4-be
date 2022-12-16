@@ -38,19 +38,19 @@
 			<tbody>
 				<c:if test="${not empty danhsach }">
 					<c:forEach var="booking" items="${danhsach}">
-						<tr>
+					<tr>
 							<td></td>
 							<td>${booking.maDatPhong }</td>
 							<td>${booking.hoTen}</td>
 							<td>${booking.sodt}</td>
-							<td><fmt:formatNumber value="${u.tienCoc }" type="number"
+							<td><fmt:formatNumber value="${booking.tienCoc }" type="number"
 												  pattern="###,###" /> $</td>
 							<td><fmt:formatDate pattern="dd - MMM - yyyy" value="${booking.checkinDuKien }" /></td>
 							<td><fmt:formatDate pattern="dd - MMM - yyyy" value="${booking.checkoutDuKien }" /></td>
 							<td>${booking.createdBy}</td>
 							<td><button type="button" class="btn btn-success btn-sm"
 										onclick="trahomestay(${booking.maDatPhong })">Check-in</button></td>
-						</tr>
+					</tr>
 					</c:forEach>
 				</c:if>
 			</tbody>

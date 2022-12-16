@@ -4,6 +4,12 @@
 <%@taglib prefix="frm" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="container" style="min-height: 690px;; margin-top: 15px">
+	<c:if test="${not empty messageError }">
+		<div class="alert alert-danger">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>${messageError }</strong>
+		</div>
+	</c:if>
 	<div class="breadcrumb"
 		style="box-shadow: 1px 1px 5px #888888; width: 40%; float: left; background-color: white">
 		<h5 style="text-align: center; font-weight: bold">Info Booking ID #${booking.maDatPhong}</h5>

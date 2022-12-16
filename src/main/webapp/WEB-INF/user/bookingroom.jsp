@@ -17,52 +17,52 @@
 				<div class="form-right-inf">
 					<div class="booking-form-content">
 						<h6>Book Room ${roomNumber} Now</h6>
-						<form:form action="/bookingroom" modelAttribute="bookingDTO"
+						<form:form action="/bookingroom" modelAttribute="booking"
 							class="book-depature-6 signin-form" method="post">
 							<div class="d-grid grid-columns4">
 								<div class="hny-frm_grid">
 									<h5>Name</h5>
-									<form:input path="name" name="name" type="text"
+									<form:input path="hoTen" name="hoTen" type="text"
 										placeholder="Your Name" required="required" value="${account.fullName}"></form:input>
 								</div>
 								<div class="hny-frm_grid">
 									<h5>Phone Number</h5>
-									<form:input path="phoneNumber" name="phoneNumber" type="text"
+									<form:input path="sodt" name="sodt" type="text"
 										placeholder="Phone Number" required="required" value="${account.phoneNumber}"></form:input>
 								</div>
 								<div class="hny-frm_grid">
 									<h5>Email</h5>
-									<form:input path="email" name="email" type="email"
-										placeholder="Email" required="required" value="${account.email}"></form:input>
+									<form:input path="" name="" type="email"
+										placeholder="Email" required="required" value="${account.email}" ></form:input>
 								</div>
+
 									<div class="hny-frm_grid">
-										<h5>Room number</h5>
-										<input value="${roomNumber}" name="roomNumber" type="number"
-											   readonly="true" placeholder="Room Number" required="" />
-									</div>
-									<div class="hny-frm_grid">
-										<h5>Room Price</h5>
-										<input value="${roomPrice}$" name="roomPrice" type="text"
-											   readonly="true"  required="" />
+										<h5>Room Price $/ Day</h5>
+										<input value="${roomPrice}" name="roomPrice" type="number" style="cursor: not-allowed"
+<%--											   style="background-color: #bacddf; cursor: not-allowed"--%>
+											   readonly="true"  required="" path=""/>
 									</div>
 									<div class="hny-frm_grid">
 										<h5>Room Type</h5>
-										<input value="${bookingDTO.roomType}" name="roomType" type="text"
+										<input value="${roomtype}" name="" type="text" style="cursor: not-allowed"
 											   readonly="true"  required="" />
 									</div>
 								<div class="hny-frm_grid">
+									<h5>Room number</h5>
+									<input value="${booking.soPhong}" path="soPhong" name="soPhong" type="number" style="cursor: not-allowed"
+										   readonly="true" placeholder="Room Number" required=""/>
+								</div>
+								<div class="hny-frm_grid">
 									<h5>Check-in Date</h5>
-									<form:input id="checkInDate" path="checkInDate"
-										name="checkInDate" type="date" placeholder="Check-in Date"
-										required="required"></form:input>
+									<form:input id="checkinDuKien" path="checkinDuKien" value="${booking.checkinDuKien}"
+												name="checkinDuKien" type="date" placeholder="Check-in Date"
+												required="required"></form:input>
 								</div>
 								<div class="hny-frm_grid">
 									<h5>Check-out Date</h5>
-									<form:input id="checkOutDate" path="checkOutDate"
-										name="checkOutDate" type="date" placeholder="Check-out Date"
+									<form:input id="checkoutDuKien" path="checkoutDuKien" value="${booking.checkoutDuKien}"
+										name="checkoutDuKien" type="date" placeholder="Check-out Date"
 										required="required"></form:input>
-									<form:input path="roomCode" name="roomCode" type="hidden"
-										placeholder="Room ID"></form:input>
 								</div>
 								<div class="hny-frm_grid">
 
@@ -70,6 +70,8 @@
 
 
 							</div>
+							<form:input path="createdBy" name="createdBy" type="text" class="d-none" value="${account.username}"></form:input>
+							<form:input path="updatedBy" name="updatedBy" type="text" class="d-none" value="${account.username}"></form:input>
 							<input type="submit"
 								class="btn btn-style btn-secondary book mt-3"
 								style="background: #f57b51; color: #fff" value="Book Now" />

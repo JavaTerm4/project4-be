@@ -51,43 +51,58 @@
             <thead style="vertical-align: middle;">
             <tr>
                 <th style="width: 50px;"></th>
+                <th>Book ID#</th>
                 <th>Renter</th>
-                <th>Phone Number</th>
-                <th>Identity Card</th>
-                <th>Deposit</th>
+                <th>Status</th>
                 <th>Room</th>
-                <th>Set time</th>
-                <th>Pay time</th>
-                <th>Total price</th>
-                <th>Reservation staff</th>
-                <th>The cashier</th>
+                <th>Checkin Date</th>
+                <th>Checkout Date</th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
             <tbody>
             <c:forEach var="u" items="${l }">
                 <tr>
                     <td></td>
-                    <td>${u.hoTen }</td>
-                    <td>${u.soDT }</td>
-                    <td>${u.soCMND }</td>
-                    <td><fmt:formatNumber value="${u.tienCoc }" type="number"
-                                          pattern="###,###$"/> $
-                    </td>
-                    <td>${u.phong.soPhong }</td>
-                    <td><fmt:formatDate pattern="HH:mm" value="${u.gioDat }"/>
-                        - <fmt:formatDate pattern="dd/MM/yyyy" value="${u.ngayDat }"/></td>
-                    <td><c:if test="${empty u.traPhongs }">Unpaid</c:if> <c:forEach
-                            var="i" items="${u.traPhongs }">
-                        <fmt:formatDate pattern="HH:mm" value="${i.gioTra }"/> - <fmt:formatDate
-                            pattern="dd/MM/yyyy" value="${i.ngayTra }"/>
-                    </c:forEach></td>
-                    <td><c:if test="${empty u.traPhongs }">Unpaid</c:if> <c:forEach
-                            var="i" items="${u.traPhongs }">
-                        <fmt:formatNumber type="number" pattern="###,###$"
-                                          value="${i.tongTien }"/>
-                    </c:forEach></td>
-                    <td style="text-align: center">${u.tenDangNhap }</td>
-                    <td style="text-align: center"><c:forEach var="i"
-                                                              items="${u.traPhongs }">${i.nguoiThuTien }</c:forEach></td>
+                    <td>${u.maDatPhong}</td>
+                    <td style="max-width: 200px; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">${u.hoTen }</td>
+                    <c:choose>
+                        <c:when test = "${u.trangThai.toString().equals('1') }">
+                            <td style="color: green">Booked</td>
+                        </c:when>
+                        <c:when test = "${u.trangThai.toString().equals('2') }">
+                            <td style="color: #ffc107">Checkin</td>
+                        </c:when>
+                        <c:when test = "${u.trangThai.toString().equals('3') }">
+                            <td style="color: #f57b51">Checkout</td>
+                        </c:when>
+                    </c:choose>
+<%--                    <td>${u.getTrangThai() == 1 ? "Booked" : u.getTrangThai() == 2 ? "Checkin" : "Checkout" }</td>--%>
+                    <td>${u.soPhong }</td>
+                    <td><fmt:formatDate pattern="dd/MM/yyyy" value="${u.checkinDuKien }"/></td>
+                    <td><fmt:formatDate pattern="dd/MM/yyyy" value="${u.checkoutDuKien }"/></td>
+                    <td><a href="usdtbkin"><button type="button" class="btn btn-info" >Details</button></a></td>
+                    <c:choose>
+                        <c:when test = "${u.trangThai.toString().equals('1') }">
+                            <td><button type="button" class="btn btn-info" data-toggle="modal" style="cursor: pointer" onclick="trahomestay(${u.maDatPhong })"
+                                        data-target="#myModalsua${u.maDatPhong}">Edit</button></td>
+                            <td><button type="button" class="btn btn-info" style="cursor: pointer" >Cancel</button></td>
+                        </c:when>
+                        <c:when test = "${u.trangThai.toString().equals('2') }">
+                            <td><button type="button" class="btn btn-info" data-toggle="modal" style="cursor: pointer" onclick="trahomestay(${u.maDatPhong })"
+                                        data-target="#myModalsua${u.maDatPhong}">Edit</button></td>
+                            <td><button type="button" class="btn btn-info" style="cursor: pointer" >Cancel</button></td>
+                        </c:when>
+                        <c:when test = "${u.trangThai.toString().equals('3') }">
+                            <td><button type="button" class="btn btn-info" data-toggle="modal" style="cursor: not-allowed" disabled onclick="trahomestay(${u.maDatPhong })"
+                                        data-target="#myModalsua${u.maDatPhong}">Edit</button></td>
+                            <td><button type="button" class="btn btn-info" style="cursor: not-allowed" disabled >Cancel</button></td>
+                        </c:when>
+                    </c:choose>
+<%--                    <td><a href="usdtbkin"><button type="button" class="btn btn-info" style="cursor: pointer">Details</button></a></td>--%>
+
+
                 </tr>
             </c:forEach>
             </tbody>
@@ -148,3 +163,11 @@
         <br>
     </c:if>
 </div>
+<script>
+    function addhomestay(maPhong, soPhong) {
+        window.location="/addhomestay?maPhong=" + maPhong + "&soPhong="+ soPhong;
+    }
+    function trahomestay(maDatPhong) {
+        window.location="/edbkad-1?maDatPhong=" + maDatPhong;
+    }
+</script>

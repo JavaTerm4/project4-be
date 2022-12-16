@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import FPTHotel.Model.Booking;
+import FPTHotel.Services.BookingServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,9 @@ public class LsdtpController {
 	@Autowired
 	Ilsdtp ilsdtp;
 
+	@Autowired
+	BookingServices bookingServices;
+
 	@ModelAttribute(name = "changeURL")
 	public String changeURL() {
 		return "lsdtp";
@@ -34,10 +39,12 @@ public class LsdtpController {
 		vitrihientai = 1;
 		activemenu(model);
 		PageRequest pageRequest = PageRequest.of(0, 10);
-		List<Checkin> l = (List<Checkin>) ilsdtp.findAllOrderByMaDesc(pageRequest);
+//		List<Checkin> l = (List<Checkin>) ilsdtp.findAllOrderByMaDesc(pageRequest);
+		List<Booking> l = bookingServices.findAllOrderByMaDesc(pageRequest);
+
 		model.addAttribute("l", l);
 		model.addAttribute("titlepage", "Check-out history");
-		model.addAttribute("listSoLuongTrang", listSoLuongTrang(ilsdtp.countFindAll(), model));
+		model.addAttribute("listSoLuongTrang", listSoLuongTrang(bookingServices.countFindAll(), model));
 		return "lsdtp";
 	}
 

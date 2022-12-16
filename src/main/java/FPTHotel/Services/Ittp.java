@@ -50,4 +50,6 @@ public interface Ittp extends CrudRepository<Room, Integer> {
 	@Modifying
 	@Query("UPDATE Room r set r.trangThai = ?1 where r.soPhong = ?2")
 	public void updatetrangThaiRoom(int trangThai, int soPhong);
+
+	public Room findBySoPhong(int soPhong);
 }
