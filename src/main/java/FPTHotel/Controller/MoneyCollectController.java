@@ -32,13 +32,13 @@ public class MoneyCollectController {
 
 	@RequestMapping(value = "/checkout-room", method = RequestMethod.POST)
 	public String bookingroom(@ModelAttribute("collect") Collect collect, Model model, @Param("soPhong") int soPhong) {
-		collect.setNoiDungChi("Pay for booking ID "+collect.getBookingId());
+		collect.setNoiDungChi("Collect for booking ID "+collect.getBookingId());
 		collect.setLoaiThuChi(2);
 		ittp.updatetrangThaiRoom(0,soPhong);
 		moneyCollectionServices.save(collect);
 		bookingServices.updateBooking(3,collect.getBookingId());
 		model.addAttribute("message", "Checkout boooking id #"+collect.getBookingId()+" successfull");
-		return "lsdtp";
+		return "redirect:/dptp";
 	}
 	@RequestMapping(value = "/recpay", method = RequestMethod.GET)
 	public String recpayPage(Model model) {

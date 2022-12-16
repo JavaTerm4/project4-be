@@ -68,6 +68,24 @@ public class BookingAdminController {
 	@RequestMapping(value = "/confirmCheckin", method = RequestMethod.POST)
 	public String confirmCheckin(HttpServletRequest httpServletRequest, ModelMap model,@ModelAttribute("booking") Booking booking, @Param("currentTrangThai") int currentTrangThai) {
 		HttpSession session = httpServletRequest.getSession();
+		if(currentTrangThai != booking.getTrangThai() && booking.getTrangThai() == 2) {
+			if(bookingServices.existsCheckingByRoom(booking.getSoPhong())){
+				model.addAttribute("messageError","Cannot change to checkin as having Guest is checking this room!");
+				List<Booking> list = bookingServices.findBookingBySoPhongAndTrangThai(Integer.valueOf(booking.getSoPhong()), 1);
+				boolean conditionReadonly = false;
+				booking.setTrangThai(1);
+				String action= "confirmCheckin?currentTrangThai="+booking.getTrangThai();
+				List<Integer> listRooms = ittp.getAllSoPhong();
+				model.addAttribute("soPhong", booking.getSoPhong());
+				model.addAttribute("titlepage", "Reservation Room "+booking.getSoPhong());
+				model.addAttribute("booking", booking);
+				model.addAttribute("currentStatus", booking.getTrangThai());
+				model.addAttribute("action",action);
+				model.addAttribute("listRooms", listRooms);
+				model.addAttribute("conditionReadonly", conditionReadonly);
+				return "editbookadmin";
+			}
+		}
 		if(currentTrangThai != booking.getTrangThai()) {
 			ittp.updatetrangThaiRoom(2,booking.getSoPhong());
 		}
@@ -80,5 +98,25 @@ public class BookingAdminController {
 		return "redirect:/dptp";
 	}
 
+
+	@RequestMapping(value = "/edbkad-1", method = RequestMethod.GET)
+	public String editBookAdmin1Page(ModelMap model,@ModelAttribute("datphong") Checkin datphong, @ModelAttribute("datphong1") Checkin datphong1, @Param("maDatPhong") int maDatPhong) {
+		Booking booking = bookingServices.findBookingByMaDatPhong(maDatPhong);
+		boolean conditionReadonly = false;
+		String action= "confirmCheckin?currentTrangThai="+booking.getTrangThai();
+
+		List<Integer> listRooms = ittp.getAllSoPhong();
+		if(booking.getTrangThai() == 2){
+			action = "confirmcheckout?currentTrangThai="+booking.getTrangThai();
+			conditionReadonly = true;
+		}
+		model.addAttribute("booking", booking);
+		model.addAttribute("titlepage", "Reservation room " +booking.getSoPhong());
+		model.addAttribute("currentStatus", booking.getTrangThai());
+		model.addAttribute("action",action);
+		model.addAttribute("listRooms", listRooms);
+		model.addAttribute("conditionReadonly", conditionReadonly);
+		return "editbookadmin";
+	}
 
 	}

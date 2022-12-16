@@ -2,17 +2,10 @@ package FPTHotel.Controller;
 
 import FPTHotel.Dto.BookingDTO;
 import FPTHotel.Event.OnBookingSuccessEvent;
-import FPTHotel.Model.Checkin;
-import FPTHotel.Model.CheckinCalendar;
-import FPTHotel.Model.Room;
+import FPTHotel.Model.*;
 import FPTHotel.Paypal.PayPalResult;
 import FPTHotel.Paypal.PayPalSuccess;
-import FPTHotel.Model.Checkout;
-import FPTHotel.Services.ITraPhong;
-import FPTHotel.Services.IttkhService;
-import FPTHotel.Services.LichDatPhongService;
-import FPTHotel.Services.PaypalServices;
-import FPTHotel.Services.QuanLyPhongService;
+import FPTHotel.Services.*;
 import FPTHotel.hepler.ZXingHelper;
 import freemarker.template.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +53,12 @@ public class HomeController {
 	
     @Autowired
     private ApplicationEventPublisher eventPublisher;
+
+    @Autowired
+    BookingServices bookingServices;
+
+    @Autowired
+    MoneyCollectionServices moneyCollectionServices;
 
     @RequestMapping({"/", "/home"})
     public String index(ModelMap model) {
@@ -252,16 +251,24 @@ public class HomeController {
     
     //Paypal
     @RequestMapping(value = "success",method = RequestMethod.GET)
-	public String success(HttpServletRequest request, HttpSession session) {
+	public String success(HttpServletRequest request, HttpSession session, Model model) {
 		PayPalSuccess payPalSuccess = new PayPalSuccess();
 		PayPalResult payPalResult = payPalSuccess.getPayPal(request,paypalServices.getPayPalConfig());
-		
-		Checkin datPhong = (Checkin)session.getAttribute("datPhong");
-        Checkout traPhong = (Checkout)session.getAttribute("traPhong");
 
-        ittkhService.save(datPhong);
-        iTraPhong.save(traPhong);
-		
+        Booking b = (Booking)session.getAttribute("booking");
+        b.setMaDatPhong((int) bookingServices.count());
+        Booking b1 = bookingServices.save(b);
+
+        Collect collect = new Collect();
+        collect.setNoiDungChi("Deposit booking ID #"+b1.getMaDatPhong());
+        collect.setLoaiThuChi(2);
+        collect.setSoTien(b.getTienCoc());
+        collect.setTenDangNhap(b.getCreatedBy());
+        collect.setBookingId(b1.getMaDatPhong());
+        moneyCollectionServices.save(collect);
+
+        model.addAttribute("booking", b);
+
 		return "success";
 	}
 

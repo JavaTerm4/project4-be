@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>A simple, clean, and responsive HTML invoice template</title>
+<title>Bambuu Hotel</title>
 
 <link href="css/style-invoice.css" rel="stylesheet">
 </head>
@@ -22,8 +22,8 @@
 								<td class="title"><img src="hinh/iconhome.ico" width="150"
 									height="150"></td>
 
-								<td>Invoice #: 0${bookingDTO.roomCode}<br> Created:
-									${bookingDTO.checkInDate}<br>
+								<td>Invoice <br> Created:
+									${booking.createdDate}<br>
 								</td>
 							</tr>
 						</table>
@@ -34,13 +34,13 @@
 					<td colspan="2">
 						<table>
 							<tr>
-								<td>Homie Hotel, Inc.<br> Phone: 0905187775<br>
+								<td>Bambuu Hotel, Inc.<br> Phone: 0931721638<br>
 									Address: 590 CMT8, Ward 11,<br> District 3,
 									City. Ho Chi Minh
 								</td>
 
-								<td>Dear: ${bookingDTO.name}.<br> Phone:
-									${bookingDTO.phoneNumber}<br> Email:${bookingDTO.email}
+								<td>Dear: ${booking.hoTen}.<br> Phone:
+									${booking.sodt}
 								</td>
 							</tr>
 						</table>
@@ -54,9 +54,9 @@
 				</tr>
 
 				<tr class="details">
-					<td>Room Price</td>
+					<td>Deposit</td>
 
-					<td>${phong.giaPhong}$</td>
+					<td>${booking.tienCoc}$</td>
 				</tr>
 
 				<tr class="heading">
@@ -69,51 +69,52 @@
 				<tr class="item">
 					<td>Room Number</td>
 
-					<td>${phong.soPhong}</td>
+					<td>${booking.soPhong}</td>
 				</tr>
 
-				<tr class="item">
-					<td>Room Type</td>
-
-					<td>${phong.loaiPhong.tenLoaiPhong}</td>
-				</tr>
 
 				<tr class="item">
 					<td>Check-in Date</td>
 
-					<td>${bookingDTO.checkInDate}</td>
+					<td>${booking.checkinDuKien}</td>
 				</tr>
 
-				<tr class="item last">
+				<tr class="item">
 					<td>Check-out Date</td>
 
-					<td>${bookingDTO.checkOutDate}</td>
+					<td>${booking.checkoutDuKien}</td>
 				</tr>
-				<tr class="item last">
-					<td>QR</td>
 
-					<td><img
-						src="${pageContext.request.contextPath}/qrcode/${bookingDTO.name}"
-						width="100" height="100"></td>
+				<tr class="item last">
+					<td>Total Rented Money</td>
+
+					<td>${booking.tienThuePhong}$</td>
 				</tr>
+<%--				<tr class="item last">--%>
+<%--					<td>QR</td>--%>
+
+<%--					<td><img--%>
+<%--						src="${pageContext.request.contextPath}/qrcode/${bookingDTO.name}"--%>
+<%--						width="100" height="100"></td>--%>
+<%--				</tr>--%>
 			</table>
 		</div>
 
 	</form>
 
 	<div class="container" align="center">
-		<form action="${paypalConfig.posturl }" method="post">
+		<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 			<!-- PayPal Setting -->
-			<input type="hidden" name="upload" value="1" /> 
-			<input type="hidden" name="return" value="${paypalConfig.returnurl }" /> 
-			<input type="hidden" name="cmd" value="_cart" /> 
+			<input type="hidden" name="upload" value="1" />
+			<input type="hidden" name="return" value="http://localhost:9596/success" />
+			<input type="hidden" name="cmd" value="_cart" />
 			<input type="hidden"
-				name="business" value="${paypalConfig.business}" /> 
-				<input type="hidden" name="item_name_1" value="${ bookingDTO.name}" />
-			<input type="hidden" name="item_number_1" value="${ bookingDTO.roomCode}" />
-			<input type="hidden" name="item_name_1" value="${phong.loaiPhong.tenLoaiPhong} " /> 
-			<input type="hidden" name="amount_1" value="${phong.giaPhong} " /> 
-			<input type="hidden" name="quantity_1" value="1" /> 
+				name="business" value="sb-penza22048291@business.example.com" />
+			<input type="hidden" name="item_name_1" value="${ booking.hoTen}" />
+			<input type="hidden" name="item_number_1" value="${ booking.soPhong}" />
+<%--			<input type="hidden" name="item_name_1" value="${phong.loaiPhong.tenLoaiPhong} " />--%>
+			<input type="hidden" name="amount_1" value="${booking.tienCoc} " />
+			<input type="hidden" name="quantity_1" value="1" />
 			<input type="image" src="${pageContext.request.contextPath}/images/paypal-button.png"
 				name="submit" width="200" height="100" alt="submit" />
 

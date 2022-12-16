@@ -38,5 +38,6 @@ public class Booking{
 	private Timestamp updatedDate;
 	private String updatedBy;
 	private Double tongTien;
+	private Double roomPrice;
 
 }
