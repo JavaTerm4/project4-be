@@ -2,6 +2,20 @@ package FPTHotel.Dto;
 
 public class BookingDTO {
 
+    /**
+     * @return the total
+     */
+    public double getTotal() {
+        return total;
+    }
+
+    /**
+     * @param total the total to set
+     */
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
     private String name;
     private String phoneNumber;
     private String email;
@@ -9,6 +23,7 @@ public class BookingDTO {
     private String checkOutDate;
     private String roomType;
     private int roomCode;
+    private double total;
 
     public int getRoomCode() {
         return roomCode;
