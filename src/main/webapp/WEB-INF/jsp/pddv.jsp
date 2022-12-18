@@ -10,8 +10,6 @@
 	color: black;
 }
 
-s
-
 .hovera:hover {
 	text-decoration: none;
 	color: black;

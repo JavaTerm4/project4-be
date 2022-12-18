@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import FPTHotel.Model.*;
+import FPTHotel.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,14 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import FPTHotel.Model.Checkin;
-import FPTHotel.Model.Service;
-import FPTHotel.Model.ServiceMenu;
-import FPTHotel.Services.DsqldvService;
-import FPTHotel.Services.Idv;
-import FPTHotel.Services.Ilsdtp;
-import FPTHotel.Services.QuanLyPhongService;
 
 @Controller
 public class DvController {
@@ -37,6 +31,9 @@ public class DvController {
 
 	@Autowired
 	DsqldvService dsqldvService;
+
+	@Autowired
+	BookingServices bookingServices;
 
 	@ModelAttribute(name = "changeURL")
 	public String changeURL() {
@@ -57,6 +54,11 @@ public class DvController {
 	@RequestMapping("/pddv")
 	public String pddv(ModelMap model) {
 		activemenu(model);
+		int trangThai = 2;
+		List<ListRoomCheckin> listBooking = bookingServices.findByTrangThai(trangThai);
+
+
+
 		List<Checkin> l = ilsdtp.timtrangthai();
 		List<Checkin> lloc = new ArrayList<>();
 		for (int i = 0; i < l.size(); i++) {
