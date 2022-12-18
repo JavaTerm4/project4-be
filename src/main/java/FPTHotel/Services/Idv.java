@@ -9,6 +9,9 @@ import FPTHotel.Model.ServiceMenu;
 
 public interface Idv extends CrudRepository<ServiceMenu, Integer>{
 
-	@Query("SELECT ddv FROM ServiceMenu ddv WHERE ddv.datPhong.maDatPhong = ?1")
-	public List<ServiceMenu> datdichvu(int madatphong);
+	@Query(value = "select sum(total) from servicemenu where ma_dat_phong = ?1", nativeQuery = true)
+	Double sumTotalByMaDatPhong(int maDatPhong);
+
+	@Query("SELECT ddv FROM ServiceMenu ddv WHERE ddv.maDatPhong = ?1")
+	List<ServiceMenu> datdichvu(int madatphong);
 }

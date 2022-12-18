@@ -153,6 +153,11 @@ public class DvController {
 			donDichVu.setTenDangNhap(nguoiDung);
 			donDichVu.setNgayDat(date);
 			donDichVu.setGioDat(date);
+			int maDv = donDichVu.getDichVu().getMaDichVu();
+			Service dichVu = dsqldvService.findByMaDichVu(maDv);
+			donDichVu.setDonGia(dichVu.getGiaDichVu());
+			donDichVu.setTotal(dichVu.getGiaDichVu() * donDichVu.getSoLuong());
+			donDichVu.setTrangThai(1);
 			idv.save(donDichVu);
 			model.addAttribute("message", "Create successfully");
 			model.addAttribute("titlepage", "Room service reservation " + sophongtemp);
@@ -179,6 +184,11 @@ public class DvController {
 			donDichVu.setTenDangNhap(nguoiDung);
 			donDichVu.setNgayDat(date);
 			donDichVu.setGioDat(date);
+			int maDv = donDichVu.getDichVu().getMaDichVu();
+			Service dichVu = dsqldvService.findByMaDichVu(maDv);
+			donDichVu.setDonGia(dichVu.getGiaDichVu());
+			donDichVu.setTotal(dichVu.getGiaDichVu() * donDichVu.getSoLuong());
+			donDichVu.setTrangThai(1);
 			idv.save(donDichVu);
 			model.addAttribute("message", "Create successfully");
 			model.addAttribute("titlepage", "Room service reservation " + sophongtemp);
@@ -205,6 +215,11 @@ public class DvController {
 			donDichVu.setTenDangNhap(nguoiDung);
 			donDichVu.setNgayDat(date);
 			donDichVu.setGioDat(date);
+			int maDv = donDichVu.getDichVu().getMaDichVu();
+			Service dichVu = dsqldvService.findByMaDichVu(maDv);
+			donDichVu.setDonGia(dichVu.getGiaDichVu());
+			donDichVu.setTotal(dichVu.getGiaDichVu() * donDichVu.getSoLuong());
+			donDichVu.setTrangThai(1);
 			idv.save(donDichVu);
 			model.addAttribute("message", "Create successly");
 			model.addAttribute("titlepage", "Room service reservation " + sophongtemp);
@@ -244,10 +259,7 @@ public class DvController {
 		Service dichVu = new Service();
 		dichVu.setMaDichVu(maDV);
 		donDichVu.setDichVu(dichVu);
-		
-		Checkin datPhong = new Checkin();
-		datPhong.setMaDatPhong(maDatPhong);
-		donDichVu.setDatPhong(datPhong);
+
 		idv.save(donDichVu);
 		
 		model.addAttribute("message", "Create successly");
@@ -316,10 +328,7 @@ public class DvController {
 	public void getlistdsdadat(ModelMap model) {
 		List<ServiceMenu> l = idv.datdichvu(madatphong);
 		model.addAttribute("l", l);
-		double sum = 0;
-		for (int i = 0; i < l.size(); i++) {
-			sum += l.get(i).getSoLuong() * l.get(i).getDichVu().getGiaDichVu();
-		}
+		double sum = l.stream().map(ServiceMenu::getTotal).reduce(0.0, Double::sum);
 		model.addAttribute("sum", sum);
 	}
 

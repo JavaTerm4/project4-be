@@ -17,10 +17,10 @@ public interface Ilsdv extends CrudRepository<ServiceMenu, Integer> {
 	@Query("SELECT count(0) FROM ServiceMenu ddv")
 	public Double countFindAll();
 
-	@Query("SELECT ddv FROM ServiceMenu ddv WHERE ddv.maDonDichVu = ?1 OR ddv.datPhong.maDatPhong = ?2 OR ddv.dichVu.tenDichVu = ?3 or ddv.dichVu.loaiDichVu = ?3 or ddv.ngayDat = ?4 ORDER BY ddv.maDonDichVu DESC")
+	@Query("SELECT ddv FROM ServiceMenu ddv WHERE ddv.maDonDichVu = ?1 OR ddv.maDatPhong = ?2 OR ddv.dichVu.tenDichVu = ?3 or ddv.dichVu.loaiDichVu = ?3 or ddv.ngayDat = ?4 ORDER BY ddv.maDonDichVu DESC")
 	public List<ServiceMenu> timlsdv(Integer maddv, Integer madp, String tendv, java.util.Date ngaydat, PageRequest pageRequest);
 	
-	@Query("SELECT count(0) FROM ServiceMenu ddv WHERE ddv.maDonDichVu = ?1 OR ddv.datPhong.maDatPhong = ?2 OR ddv.dichVu.tenDichVu = ?3 or ddv.dichVu.loaiDichVu = ?3 or ddv.ngayDat = ?4")
+	@Query("SELECT count(0) FROM ServiceMenu ddv WHERE ddv.maDonDichVu = ?1 OR ddv.maDatPhong = ?2 OR ddv.dichVu.tenDichVu = ?3 or ddv.dichVu.loaiDichVu = ?3 or ddv.ngayDat = ?4")
 	public Double countTimlsdv(Integer maddv,Integer madp, String tendv,java.util.Date ngaydat);
 	
 	@Query("SELECT ddv FROM ServiceMenu ddv WHERE ddv.ngayDat BETWEEN ?1 and ?2")

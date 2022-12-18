@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <frm:form action="actionanuong" modelAttribute="donDichVu">
 	<table style="width: 100%;">
-		<frm:hidden path="datPhong.maDatPhong" value="${madatphong }" />
+		<frm:hidden path="maDatPhong" value="${madatphong }" />
 		<tr>
 			<td>Select the product:</td>
 			<td><frm:select class="form-control input-sm"

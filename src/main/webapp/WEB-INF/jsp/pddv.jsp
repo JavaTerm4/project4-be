@@ -59,6 +59,7 @@
 					<c:forEach var="room" items="${listRoomCheckin}">
 						<c:if test="${room.tang == i }">
 							<div class="itemdptp">
+								<a href="dv?madatphong=${room.maDatPhong }&sophong=${room.soPhong }">
 									<img class="icondptp" src='hinh/homered.png'>
 									<div class="thongtinttk2">
 										<div>
