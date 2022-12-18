@@ -39,7 +39,7 @@
 							page="${param.view }"></jsp:include></td>
 					<td class="bangdv" align="center"></c:if>
 						<div class="overflowdv1"
-							style=" height: auto; width: <c:if test="${not empty width }">100%</c:if><c:if test="${empty width }">750px</c:if>;">
+							style=" height: auto;">
 							<table class="table table-striped borderdv css-serial"
 								style="width: <c:if test="${not empty width }">100%</c:if><c:if test="${empty width }">500px</c:if>;margin-bottom: 0;">
 								<thead>

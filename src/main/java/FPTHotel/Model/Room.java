@@ -1,5 +1,6 @@
 package FPTHotel.Model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -12,7 +13,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="phong")
-public class Room {
+public class Room implements Serializable{
+	private static final long serialVersionUID = 156461651651L;
 	@Id
 	private int maPhong;
 	@NotNull(message="- Room numbers are not available")
