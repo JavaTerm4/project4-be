@@ -3,6 +3,7 @@ package FPTHotel.Controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -54,34 +55,28 @@ public class DvController {
 	@RequestMapping("/pddv")
 	public String pddv(ModelMap model) {
 		activemenu(model);
-		int trangThai = 2;
-		List<ListRoomCheckin> listBooking = bookingServices.findByTrangThai(trangThai);
+		List<Booking> listBooking = bookingServices.findRoomForService();
 
-
-
-		List<Checkin> l = ilsdtp.timtrangthai();
-		List<Checkin> lloc = new ArrayList<>();
-		for (int i = 0; i < l.size(); i++) {
-			if (l.get(i).getTraPhongs().isEmpty())
-				lloc.add(l.get(i));
-		}
-		model.addAttribute("l", lloc);
-
-		List<Integer> ltang = new ArrayList<>();
-		// kiem tra da ton tai chua
-		for (int i = 0; i < l.size(); i++) {
-			if (!ltang.contains(l.get(i).getPhong().getTang())) {
-				ltang.add(l.get(i).getPhong().getTang());
-			}
-		}
-
-		if (lloc.isEmpty()) {
-
+		if (listBooking.isEmpty()) {
 			model.addAttribute("message", "All rooms are empty");
+			return "pddv";
 		}
-		model.addAttribute("ltang", ltang);
 
+		List<ListRoomCheckin> listRoomCheckin = listBooking.stream().map(b ->{
+				ListRoomCheckin listRoomCheckin1 = new ListRoomCheckin();
+				listRoomCheckin1.setMaDatPhong(b.getMaDatPhong());
+				listRoomCheckin1.setSoPhong(b.getSoPhong());
+				listRoomCheckin1.setTang(b.getRoom().getTang());
+				listRoomCheckin1.setKhuyenMai(b.getRoom().getKhuyenMai());
+				listRoomCheckin1.setTenLoaiPhong(b.getRoom().getLoaiPhong().getTenLoaiPhong());
+				return listRoomCheckin1;
+			}).collect(Collectors.toList());
+		List<Integer> listTang = listRoomCheckin.stream().map(ListRoomCheckin::getTang).distinct().collect(Collectors.toList());
+		listTang.sort(Integer::compareTo);
+		model.addAttribute("listRoomCheckin", listRoomCheckin);
+		model.addAttribute("listTang", listTang);
 		model.addAttribute("titlepage", "Select a reservation service");
+
 		return "pddv";
 	}
 

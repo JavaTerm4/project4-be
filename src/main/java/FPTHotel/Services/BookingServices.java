@@ -2,6 +2,7 @@ package FPTHotel.Services;
 
 import FPTHotel.Model.Booking;
 import FPTHotel.Model.ListRoomCheckin;
+import FPTHotel.Model.Room;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -27,11 +28,11 @@ public interface BookingServices extends CrudRepository<Booking, Integer> {
 	@Query("select case when count(b)> 0 then true else false end from Booking b where b.trangThai IN (2) AND b.soPhong = ?1")
 	boolean existsCheckingByRoom(int soPhong);
 
-	@Query(value = "select p.ma_phong as maPhong, p.so_phong as soPhong, p.khuyen_mai as khuyenMai, r.ten_loai_phong as tenLoaiPhong from phong p " +
-			"inner join booking b on p.so_phong = b.so_phong " +
-			"inner join roomtype r on p.ma_loai_phong = r.ma_loai_phong " +
-			"where b.trang_thai = 2", nativeQuery = true)
-	List<ListRoomCheckin> findByTrangThai(int trangThai);
+	@Query(value = "select b from Booking b " +
+			"inner join Room r on r.soPhong = b.soPhong " +
+			"inner join RoomType tp on r.maLoaiPhong = tp.maLoaiPhong " +
+			"where b.trangThai = 2")
+	List<Booking> findRoomForService();
 
 	@Modifying
 	@Query("UPDATE Booking b SET b.trangThai = ?1 WHERE b.maDatPhong = ?2")

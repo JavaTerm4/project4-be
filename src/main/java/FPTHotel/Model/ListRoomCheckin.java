@@ -10,8 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ListRoomCheckin {
+    private int maDatPhong;
     private int maPhong;
     private int soPhong;
-    private int khuyenMai;
+    private String khuyenMai;
+    private int tang;
     private String tenLoaiPhong;
 }

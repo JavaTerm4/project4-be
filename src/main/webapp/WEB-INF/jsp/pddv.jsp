@@ -43,7 +43,7 @@
 	</c:if>
 </div>
 <div class="container" style="height: auto; margin-top: 20px;">
-	<c:forEach var="i" items="${ltang }">
+	<c:forEach var="i" items="${listTang}">
 		<div style="width: 100%">
 			<div style="width: 100%; height: 80px;">
 				<img align="right"
@@ -56,39 +56,24 @@
 			<div style="clear: both; width: 100%;">
 				<div class="breadcrumb"
 					style="box-shadow: 1px 1px 5px #888888; width: 100%;">
-					<c:forEach var="u" items="${l }">
-						<c:if test="${i==u.phong.tang }">
+					<c:forEach var="room" items="${listRoomCheckin}">
+						<c:if test="${room.tang == i }">
 							<div class="itemdptp">
-								<a class="hovera"
-									<c:if test="${u.phong.trangThai==1 }">
-								href="dv?madatphong=${u.maDatPhong }&sophong=${u.phong.soPhong }"
-								</c:if>
-									<c:if test="${u.phong.trangThai==2 }">
-								href="homestaydv?maPhong=${u.phong.maPhong }&soPhong=${u.phong.soPhong }"
-								</c:if>>
-									<img class="icondptp"
-									src='<c:if test="${u.phong.trangThai==0 }">hinh/homegreen.png</c:if>
-									<c:if test="${u.phong.trangThai==1 }">hinh/homered.png</c:if>
-									<c:if test="${u.phong.trangThai==2 }">hinh/homecam.png</c:if>'>
+									<img class="icondptp" src='hinh/homered.png'>
 									<div class="thongtinttk2">
 										<div>
-											<b>Room: </b>${u.phong.soPhong }
+											<b>Room: </b>${room.soPhong }
 										</div>
 										<div>
 											<b>Type: </b>
-											<c:if test="${u.phong.loaiPhong.tenLoaiPhong=='VIP'}">
+											<c:if test="${room.tenLoaiPhong=='VIP'}">
 												<img src="hinh/vip.png" width="55px" height="23px"
-													style="margin-bottom: 5px; -webkit-filter: drop-shadow(1px 1px 1px #fff0b6); filter: drop-shadow(1px 1px 1px #fff0b6);"></img>
+													style="margin-bottom: 5px; -webkit-filter: drop-shadow(1px 1px 1px #fff0b6); filter: drop-shadow(1px 1px 1px #fff0b6);"/>
 											</c:if>
-											<c:if test="${u.phong.loaiPhong.tenLoaiPhong=='Thường'}">Normal</c:if>
+											<c:if test="${room.tenLoaiPhong=='Normal'}">Normal</c:if>
 										</div>
 										<div>
-											<b>Discount: </b>${u.phong.khuyenMai } %
-										</div>
-										<div>
-											<b>Status: </b>
-											<c:if test="${u.phong.trangThai==0 }">Vacancy</c:if>
-											<c:if test="${u.phong.trangThai==1}">Rented</c:if>
+											<b>Discount: </b>${room.khuyenMai }%
 										</div>
 									</div>
 								</a>
