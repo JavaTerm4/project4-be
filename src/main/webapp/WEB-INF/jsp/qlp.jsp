@@ -469,7 +469,7 @@ transition
 </style>
 
 					<!-- The Modal image -->
-					<div id="myModal${u.maPhong}" class="modal${u.maPhong}">
+					<div id="myModal${u.maPhong}" class="modal${u.maPhong}" style="display: none">
 						<span class="close${u.maPhong}">&times;</span> <img
 							class="modal${u.maPhong}-content" id="${u.maPhong}">
 						<div id="caption${u.maPhong}"></div>
