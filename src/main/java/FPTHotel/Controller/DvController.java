@@ -3,10 +3,13 @@ package FPTHotel.Controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import FPTHotel.Model.*;
+import FPTHotel.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,14 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import FPTHotel.Model.Checkin;
-import FPTHotel.Model.Service;
-import FPTHotel.Model.ServiceMenu;
-import FPTHotel.Services.DsqldvService;
-import FPTHotel.Services.Idv;
-import FPTHotel.Services.Ilsdtp;
-import FPTHotel.Services.QuanLyPhongService;
 
 @Controller
 public class DvController {
@@ -37,6 +32,9 @@ public class DvController {
 
 	@Autowired
 	DsqldvService dsqldvService;
+
+	@Autowired
+	BookingServices bookingServices;
 
 	@ModelAttribute(name = "changeURL")
 	public String changeURL() {
@@ -57,29 +55,28 @@ public class DvController {
 	@RequestMapping("/pddv")
 	public String pddv(ModelMap model) {
 		activemenu(model);
-		List<Checkin> l = ilsdtp.timtrangthai();
-		List<Checkin> lloc = new ArrayList<>();
-		for (int i = 0; i < l.size(); i++) {
-			if (l.get(i).getTraPhongs().isEmpty())
-				lloc.add(l.get(i));
-		}
-		model.addAttribute("l", lloc);
+		List<Booking> listBooking = bookingServices.findRoomForService();
 
-		List<Integer> ltang = new ArrayList<>();
-		// kiem tra da ton tai chua
-		for (int i = 0; i < l.size(); i++) {
-			if (!ltang.contains(l.get(i).getPhong().getTang())) {
-				ltang.add(l.get(i).getPhong().getTang());
-			}
-		}
-
-		if (lloc.isEmpty()) {
-
+		if (listBooking.isEmpty()) {
 			model.addAttribute("message", "All rooms are empty");
+			return "pddv";
 		}
-		model.addAttribute("ltang", ltang);
 
+		List<ListRoomCheckin> listRoomCheckin = listBooking.stream().map(b ->{
+				ListRoomCheckin listRoomCheckin1 = new ListRoomCheckin();
+				listRoomCheckin1.setMaDatPhong(b.getMaDatPhong());
+				listRoomCheckin1.setSoPhong(b.getSoPhong());
+				listRoomCheckin1.setTang(b.getRoom().getTang());
+				listRoomCheckin1.setKhuyenMai(b.getRoom().getKhuyenMai());
+				listRoomCheckin1.setTenLoaiPhong(b.getRoom().getLoaiPhong().getTenLoaiPhong());
+				return listRoomCheckin1;
+			}).collect(Collectors.toList());
+		List<Integer> listTang = listRoomCheckin.stream().map(ListRoomCheckin::getTang).distinct().collect(Collectors.toList());
+		listTang.sort(Integer::compareTo);
+		model.addAttribute("listRoomCheckin", listRoomCheckin);
+		model.addAttribute("listTang", listTang);
 		model.addAttribute("titlepage", "Select a reservation service");
+
 		return "pddv";
 	}
 
@@ -156,6 +153,11 @@ public class DvController {
 			donDichVu.setTenDangNhap(nguoiDung);
 			donDichVu.setNgayDat(date);
 			donDichVu.setGioDat(date);
+			int maDv = donDichVu.getDichVu().getMaDichVu();
+			Service dichVu = dsqldvService.findByMaDichVu(maDv);
+			donDichVu.setDonGia(dichVu.getGiaDichVu());
+			donDichVu.setTotal(dichVu.getGiaDichVu() * donDichVu.getSoLuong());
+			donDichVu.setTrangThai(1);
 			idv.save(donDichVu);
 			model.addAttribute("message", "Create successfully");
 			model.addAttribute("titlepage", "Room service reservation " + sophongtemp);
@@ -182,6 +184,11 @@ public class DvController {
 			donDichVu.setTenDangNhap(nguoiDung);
 			donDichVu.setNgayDat(date);
 			donDichVu.setGioDat(date);
+			int maDv = donDichVu.getDichVu().getMaDichVu();
+			Service dichVu = dsqldvService.findByMaDichVu(maDv);
+			donDichVu.setDonGia(dichVu.getGiaDichVu());
+			donDichVu.setTotal(dichVu.getGiaDichVu() * donDichVu.getSoLuong());
+			donDichVu.setTrangThai(1);
 			idv.save(donDichVu);
 			model.addAttribute("message", "Create successfully");
 			model.addAttribute("titlepage", "Room service reservation " + sophongtemp);
@@ -208,6 +215,11 @@ public class DvController {
 			donDichVu.setTenDangNhap(nguoiDung);
 			donDichVu.setNgayDat(date);
 			donDichVu.setGioDat(date);
+			int maDv = donDichVu.getDichVu().getMaDichVu();
+			Service dichVu = dsqldvService.findByMaDichVu(maDv);
+			donDichVu.setDonGia(dichVu.getGiaDichVu());
+			donDichVu.setTotal(dichVu.getGiaDichVu() * donDichVu.getSoLuong());
+			donDichVu.setTrangThai(1);
 			idv.save(donDichVu);
 			model.addAttribute("message", "Create successly");
 			model.addAttribute("titlepage", "Room service reservation " + sophongtemp);
@@ -247,10 +259,7 @@ public class DvController {
 		Service dichVu = new Service();
 		dichVu.setMaDichVu(maDV);
 		donDichVu.setDichVu(dichVu);
-		
-		Checkin datPhong = new Checkin();
-		datPhong.setMaDatPhong(maDatPhong);
-		donDichVu.setDatPhong(datPhong);
+
 		idv.save(donDichVu);
 		
 		model.addAttribute("message", "Create successly");
@@ -319,10 +328,7 @@ public class DvController {
 	public void getlistdsdadat(ModelMap model) {
 		List<ServiceMenu> l = idv.datdichvu(madatphong);
 		model.addAttribute("l", l);
-		double sum = 0;
-		for (int i = 0; i < l.size(); i++) {
-			sum += l.get(i).getSoLuong() * l.get(i).getDichVu().getGiaDichVu();
-		}
+		double sum = l.stream().map(ServiceMenu::getTotal).reduce(0.0, Double::sum);
 		model.addAttribute("sum", sum);
 	}
 

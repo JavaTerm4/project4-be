@@ -1,7 +1,6 @@
 package FPTHotel.Services;
 
 import FPTHotel.Model.Booking;
-import FPTHotel.Model.Checkin;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -32,6 +31,11 @@ public interface BookingServices extends CrudRepository<Booking, Integer> {
 			"WHERE b.soPhong = ?1 AND b.trangThai IN (1,2) AND (b.checkinDuKien >= ?2 " +
 			"AND b.checkinDuKien <= ?3 OR b.checkoutDuKien >= ?2 AND b.checkoutDuKien <= ?3) ")
 	boolean existsBookingByCheckinout(int soPhong, Date checkin, Date Checkout);
+	@Query(value = "select b from Booking b " +
+			"inner join Room r on r.soPhong = b.soPhong " +
+			"inner join RoomType tp on r.maLoaiPhong = tp.maLoaiPhong " +
+			"where b.trangThai = 2")
+	List<Booking> findRoomForService();
 
 	@Modifying
 	@Query("UPDATE Booking b SET b.trangThai = ?1 WHERE b.maDatPhong = ?2")

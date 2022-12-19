@@ -9,7 +9,8 @@ import FPTHotel.Model.Service;
 
 
 public interface DsqldvService extends CrudRepository<Service, Integer> {
-	
+
+	Service findByMaDichVu(int maDichVu);
 	@Query("select d from Service d where d.maDichVu = ?1 or d.tenDichVu = ?2")
 	public List<Service> timldsdv(int data1, String data2);
 	

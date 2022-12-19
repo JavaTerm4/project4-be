@@ -164,21 +164,53 @@ public class BookingApiController {
 
         Booking book = new Booking();
         book.setHoTen(b.getName());
-        book.setSodt(b.getPhoneNumber());
+//        book.setSodt(b.getPhoneNumber());
         book.setSoPhong(b.getRoomCode());
         book.setTrangThai(1);
         book.setCheckinDuKien(checkin);
         book.setCheckoutDuKien(checkout);
         book.setCreatedBy(user);
         book.setUpdatedBy(user);
-        book.setTongTien(priceDay);
+        book.setTongTien(b.getTotal());
         book.setTienCoc(0.0);
         book.setTienDichVu(0.0);
-        book.setTienThuePhong(priceDay);
+        book.setTienThuePhong(b.getTotal());
         book.setRoomPrice(b.getTotal());
-        book.setCreatedDate(Timestamp.valueOf(now));
         book.setUpdatedDate(Timestamp.valueOf(now));
+        book.setCreatedDate(Timestamp.valueOf(now));
         bookingServices.save(book);
         return ResponseEntity.ok(5);
+    }
+
+    @GetMapping("/room-type")
+    public ResponseEntity<?> roomType(@RequestParam("type") String type){
+        Calendar calendar = Calendar.getInstance();
+        Date checkin = calendar.getTime();
+        calendar.add(Calendar.DATE, +20);
+        Date checkout = calendar.getTime();
+
+        List<Room> rooms = quanLyPhongService.roomType(checkin, checkout,type);
+        List<RoomDto> roomDtos = rooms.stream().map(room -> {
+            RoomDto roomDto = new RoomDto();
+            roomDto.setMaPhong(room.getMaPhong());
+            roomDto.setGiaPhong(room.getGiaPhong());
+            roomDto.setSoPhong(room.getSoPhong());
+            roomDto.setTang(room.getTang());
+            roomDto.setTrangThai(room.getTrangThai());
+
+            RoomTypeDto roomTypeDto = new RoomTypeDto();
+            roomTypeDto.setMaLoaiPhong(room.getLoaiPhong().getMaLoaiPhong());
+            roomTypeDto.setTenLoaiPhong(room.getLoaiPhong().getTenLoaiPhong());
+            roomTypeDto.setMoTa(room.getLoaiPhong().getMoTa());
+
+            roomDto.setLoaiPhong(roomTypeDto);
+            roomDto.setGiaPhongGioDau(room.getGiaPhongGioDau());
+            roomDto.setHinhAnh("/hinh/phong/"+room.getHinhAnh());
+            roomDto.setKhuyenMai(room.getKhuyenMai());
+            roomDto.setTienNghi(room.getTienNghi());
+            roomDto.setGiaPhongGioSau(room.getGiaPhongGioSau());
+            return roomDto;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(roomDtos.subList(0,10));
     }
 }

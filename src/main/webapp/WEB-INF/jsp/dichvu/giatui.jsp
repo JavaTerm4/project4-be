@@ -6,11 +6,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <frm:form action="actiongiatui" modelAttribute="donDichVu">
 	<table style="width: 100%;">
-		<frm:hidden path="datPhong.maDatPhong" value="${madatphong }" />
+		<frm:hidden path="maDatPhong" value="${madatphong }" />
 		<tr>
 			<td>Choose an item:</td>
 			<td><frm:select class="form-control input-sm"
-					path="dichVu.maDichVu">
+					path="dichVu.maDichVu"
+							onchange="select();">
 					<c:forEach var="u" items="${ltendichvugiatui }">
 						<frm:option value="${u.maDichVu }" label="${u.tenDichVu }" />
 					</c:forEach>

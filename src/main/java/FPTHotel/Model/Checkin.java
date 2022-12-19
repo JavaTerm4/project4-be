@@ -38,10 +38,6 @@ public class Checkin {
     private String loaiDat;
     private String tenDangNhap;
 
-
-    @OneToMany(mappedBy = "datPhong", fetch = FetchType.LAZY)
-    private Collection<ServiceMenu> donDichVus;
-
     @OneToMany(mappedBy = "datPhong", fetch = FetchType.LAZY)
     private Collection<Checkout> traPhongs;
 
@@ -143,14 +139,6 @@ public class Checkin {
 
     public void setTenDangNhap(String tenDangNhap) {
         this.tenDangNhap = tenDangNhap;
-    }
-
-    public Collection<ServiceMenu> getDonDichVus() {
-        return donDichVus;
-    }
-
-    public void setDonDichVus(Collection<ServiceMenu> donDichVus) {
-        this.donDichVus = donDichVus;
     }
 
     public Collection<Checkout> getTraPhongs() {
