@@ -9,11 +9,11 @@ import FPTHotel.Services.ITaikhoanServices;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -47,10 +47,17 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterDto dto) {
+    public ResponseEntity<?> register(@RequestBody @ModelAttribute RegisterDto dto,String birth) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date checkinDate = new Date();
+        try {
+            checkinDate = formatter.parse(birth);
+        }catch (Exception e) {
+            e.getMessage();
+        }
         Account accountQuery = iTaikhoanServices.findByUsername(dto.getUsername());
         if (!Objects.isNull(accountQuery)) {
-            return ResponseEntity.badRequest().body("Username is exist");
+            return ResponseEntity.badRequest().body(1);
         }
         Account account = new Account();
         account.setTenDangNhap(dto.getUsername());
@@ -59,13 +66,13 @@ public class UserController {
         account.setSoDT(dto.getPhoneNumber());
         account.setEmail(dto.getEmail());
         account.setGioiTinh(dto.getGender());
-        account.setNgaySinh(dto.getBirthday());
+        account.setNgaySinh(checkinDate);
         account.setCmnd("000000000");
         Position p = new Position();
         p.setMaChucVu(3);
         account.setChucVu(p);
         dangnhapservice.save(account);
-        return ResponseEntity.ok("Register success");
+        return ResponseEntity.ok(2);
     }
 
 }

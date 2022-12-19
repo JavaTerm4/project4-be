@@ -137,7 +137,18 @@ public class BookingApiController {
     @GetMapping("/booking-history")
     public ResponseEntity<?> history(@RequestParam("user") String user){
         List<Booking> history = bookingServices.findByCreatedBy(user);
-        return ResponseEntity.ok(history);
+        List<Booking> room = history.stream().map(r -> {
+            Booking b = new Booking();
+            b.setHoTen(r.getHoTen());
+            b.setSodt(r.getSodt());
+            b.setSoPhong(r.getSoPhong());
+            b.setRoomPrice(r.getRoomPrice());
+            b.setTongTien(r.getTongTien());
+            b.setCheckinDuKien(r.getCheckinDuKien());
+            b.setCheckoutDuKien(r.getCheckoutDuKien());
+            return b;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(room);
     }
 
     @PostMapping("/booking")
@@ -161,23 +172,25 @@ public class BookingApiController {
             return ResponseEntity.ok(4);
         }        
         Double priceDay = b.getTotal() * noDay;
+        int id = (int) Math.round(bookingServices.countFindAll());
 
         Booking book = new Booking();
+        book.setMaDatPhong(id);
         book.setHoTen(b.getName());
-//        book.setSodt(b.getPhoneNumber());
+        book.setSodt(b.getPhoneNumber());
         book.setSoPhong(b.getRoomCode());
         book.setTrangThai(1);
         book.setCheckinDuKien(checkin);
         book.setCheckoutDuKien(checkout);
         book.setCreatedBy(user);
         book.setUpdatedBy(user);
-        book.setTongTien(b.getTotal());
+        book.setTongTien(priceDay);
         book.setTienCoc(0.0);
         book.setTienDichVu(0.0);
-        book.setTienThuePhong(b.getTotal());
+        book.setTienThuePhong(priceDay);
         book.setRoomPrice(b.getTotal());
-        book.setUpdatedDate(Timestamp.valueOf(now));
         book.setCreatedDate(Timestamp.valueOf(now));
+        book.setUpdatedDate(Timestamp.valueOf(now));
         bookingServices.save(book);
         return ResponseEntity.ok(5);
     }
@@ -212,5 +225,10 @@ public class BookingApiController {
             return roomDto;
         }).collect(Collectors.toList());
         return ResponseEntity.ok(roomDtos.subList(0,10));
+    }
+
+    @GetMapping("/room-home")
+    public ResponseEntity<?> roomForHome(){
+        return ResponseEntity.ok(1);
     }
 }
