@@ -72,7 +72,13 @@ public class BookingApiController {
                                           @RequestParam("room") int room) {
         List<Booking> book = bookingServices.getAvailableForRoom(room, checkin, checkout);
         if(!book.isEmpty()){
-            return ResponseEntity.ok(book);
+            List<Booking> r = book.stream().map(b -> {
+                Booking c = new Booking();
+                c.setCheckinDuKien(b.getCheckinDuKien());
+                c.setCheckoutDuKien(b.getCheckoutDuKien());
+                return c;
+            }).collect(Collectors.toList());
+            return ResponseEntity.ok(r);
         }
         return ResponseEntity.ok(null);
     }
@@ -139,6 +145,8 @@ public class BookingApiController {
         List<Booking> history = bookingServices.findByCreatedBy(user);
         List<Booking> room = history.stream().map(r -> {
             Booking b = new Booking();
+            b.setMaDatPhong(r.getMaDatPhong());
+            b.setCreatedBy(r.getCreatedBy());
             b.setHoTen(r.getHoTen());
             b.setSodt(r.getSodt());
             b.setSoPhong(r.getSoPhong());
@@ -151,6 +159,15 @@ public class BookingApiController {
         return ResponseEntity.ok(room);
     }
 
+//    @GetMapping("/delete-booking")
+//    public ResponseEntity<?> deleteBooking(@RequestParam("user") String user,@RequestParam("id") int id){
+//        System.out.println(id);
+//        bookingServices.deleteById(id);
+//        if(status){
+//            return ResponseEntity.ok(1);
+//        }
+//        return ResponseEntity.ok(0);
+//    }
     @PostMapping("/booking")
     public ResponseEntity<?> booking(@Validated @RequestBody @ModelAttribute BookingDTO b,String user,
                                         java.sql.Date checkin,java.sql.Date checkout){

@@ -4,7 +4,9 @@ import FPTHotel.Common.Common;
 import FPTHotel.Dto.LoginDto;
 import FPTHotel.Dto.RegisterDto;
 import FPTHotel.Model.Account;
+import FPTHotel.Model.Feedback;
 import FPTHotel.Model.Position;
+import FPTHotel.Services.FeedbackService;
 import FPTHotel.Services.ITaikhoanServices;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +30,10 @@ public class UserController {
 
     @Autowired
     ITaikhoanServices iTaikhoanServices;
+
+    @Autowired
+    FeedbackService feedService;
+
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto account) {
@@ -49,9 +55,9 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @ModelAttribute RegisterDto dto,String birth) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date checkinDate = new Date();
+        Date birthday = new Date();
         try {
-            checkinDate = formatter.parse(birth);
+            birthday = formatter.parse(birth);
         }catch (Exception e) {
             e.getMessage();
         }
@@ -66,7 +72,7 @@ public class UserController {
         account.setSoDT(dto.getPhoneNumber());
         account.setEmail(dto.getEmail());
         account.setGioiTinh(dto.getGender());
-        account.setNgaySinh(checkinDate);
+        account.setNgaySinh(birthday);
         account.setCmnd("000000000");
         Position p = new Position();
         p.setMaChucVu(3);
@@ -74,5 +80,66 @@ public class UserController {
         dangnhapservice.save(account);
         return ResponseEntity.ok(2);
     }
+    @PostMapping("/update")
+    public ResponseEntity<?> updateProfile(@RequestBody @ModelAttribute RegisterDto dto,String birth) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date birthday = new Date();
+        try {
+            birthday = formatter.parse(birth);
+        }catch (Exception e) {
+            e.getMessage();
+        }
+        Account user = iTaikhoanServices.findByUsername(dto.getUsername());
+        if(dto.getEmail().isEmpty()){
+            dto.setEmail(user.getEmail());
+        }
+        if (dto.getFullName().isEmpty()){
+            dto.setFullName(user.getHoTen());
+        }
+        if (dto.getPhoneNumber().isEmpty()){
+            dto.setPhoneNumber(user.getSoDT());
+        }
+        if(dto.getGender().isEmpty()){
+            dto.setGender(user.getGioiTinh());
+        }
 
+        user.setTenDangNhap(dto.getUsername());
+        user.setHoTen(dto.getFullName());
+        user.setSoDT(dto.getPhoneNumber());
+        user.setEmail(dto.getEmail());
+        user.setGioiTinh(dto.getGender());
+        user.setNgaySinh(birthday);
+        user.setCmnd("000000000");
+        Position p = new Position();
+        p.setMaChucVu(3);
+        user.setChucVu(p);
+        dangnhapservice.save(user);
+        return ResponseEntity.ok(1);
+    }
+    @GetMapping("/profile")
+    public ResponseEntity<?> updateProfile(@RequestParam("username") String username){
+        Account u = iTaikhoanServices.findByUsername(username);
+        Account ac = new Account();
+        ac.setTenDangNhap(u.getTenDangNhap());
+        ac.setNgaySinh(u.getNgaySinh());
+        ac.setGioiTinh(u.getGioiTinh());
+        ac.setEmail(u.getEmail());
+        ac.setHoTen(u.getHoTen());
+        ac.setSoDT(u.getSoDT());
+        return ResponseEntity.ok(ac);
+    }
+
+    @PostMapping("/feedback")
+    public ResponseEntity<?> feedback(@RequestBody @ModelAttribute Feedback f ){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Feedback feed = new Feedback();
+        feed.setCreatedBy(f.getCreatedBy());
+        feed.setHoTen(f.getHoTen());
+        feed.setEmail(f.getEmail());
+        feed.setTitle(f.getTitle());
+        feed.setContent(f.getContent());
+        feed.setCreatedDate(timestamp);
+        feedService.save(feed);
+        return ResponseEntity.ok(1);
+    }
 }
