@@ -14,13 +14,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.data.repository.query.Param;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -90,6 +93,4 @@ public class BookingController {
 		model.addAttribute("bookingDTO", bookingDTO);
 		return "bookingroom";
 	}
-
-
 }

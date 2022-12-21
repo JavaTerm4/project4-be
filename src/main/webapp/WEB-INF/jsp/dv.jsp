@@ -32,16 +32,16 @@
 	<hr>
 	<c:if test="${empty width }">
 		<div class="inputdv-mobile"><jsp:include page="${param.view }"></jsp:include></div>
-		<div class="overflowdv">
+		<div class="overflowdv" style="position: relative;">
 			<table>
 				<tr>
 					<td class="nhapdv" valign="top"><jsp:include
 							page="${param.view }"></jsp:include></td>
-					<td class="bangdv" align="center"></c:if>
+					<td class="bangdv" align="center" style="position: absolute"></c:if>
 						<div class="overflowdv1"
 							style=" height: auto;">
 							<table class="table table-striped borderdv css-serial"
-								style="width: <c:if test="${not empty width }">100%</c:if><c:if test="${empty width }">500px</c:if>;margin-bottom: 0;">
+								style="width: 100%;margin-bottom: 0;">
 								<thead>
 									<tr>
 										<th colspan="6" style="text-align: center;">Service list

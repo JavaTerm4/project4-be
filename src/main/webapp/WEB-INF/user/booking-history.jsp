@@ -46,9 +46,9 @@
                     </td>
                     <td>${u.getTienThuePhong()}</td>
                     <td>${u.getTienCoc()}</td>
-                    <td><a href="usdtbkin"><button type="button" class="btn btn-dark">Details</button></a></td>
-                    <td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModalsua${u.maDatPhong}">Edit</button></td>
-                    <td><button type="button" class="btn btn-dark" >Cancel</button></td>
+                    <td><a href="usdtbkin"><button type="button" class="btn btn-info">Details</button></a></td>
+                    <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalsua${u.maDatPhong}">Edit</button></td>
+                    <td><button type="button" class="btn btn-secondary" >Cancel</button></td>
                 </tr>
 
 <%--                <div class="modal fade" id="myModalsua${u.maDatPhong }"--%>
@@ -87,11 +87,6 @@
 <%--                                <div class="modal-footer">--%>
 <%--                                    <frm:button class="btn btn-warning">--%>
 <%--                                        <i class="fa fa-edit"></i>Update</frm:button>--%>
-<%--                                </div>--%>
-<%--                            </frm:form>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
             </c:forEach>
             </tbody>
         </table>
