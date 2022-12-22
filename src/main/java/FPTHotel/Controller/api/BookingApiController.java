@@ -57,7 +57,7 @@ public class BookingApiController {
 
             roomDto.setLoaiPhong(roomTypeDto);
             roomDto.setGiaPhongGioDau(room.getGiaPhongGioDau());
-            roomDto.setHinhAnh(room.getHinhAnh());
+            roomDto.setHinhAnh("/hinh/phong/"+room.getHinhAnh());
             roomDto.setKhuyenMai(room.getKhuyenMai());
             roomDto.setTienNghi(room.getTienNghi());
             roomDto.setGiaPhongGioSau(room.getGiaPhongGioSau());
@@ -159,15 +159,6 @@ public class BookingApiController {
         return ResponseEntity.ok(room);
     }
 
-//    @GetMapping("/delete-booking")
-//    public ResponseEntity<?> deleteBooking(@RequestParam("user") String user,@RequestParam("id") int id){
-//        System.out.println(id);
-//        bookingServices.deleteById(id);
-//        if(status){
-//            return ResponseEntity.ok(1);
-//        }
-//        return ResponseEntity.ok(0);
-//    }
     @PostMapping("/booking")
     public ResponseEntity<?> booking(@Validated @RequestBody @ModelAttribute BookingDTO b,String user,
                                         java.sql.Date checkin,java.sql.Date checkout){
@@ -187,7 +178,10 @@ public class BookingApiController {
         }
         if(bookingServices.existsBookingByCheckinout(b.getRoomCode() ,checkin, checkout)){
             return ResponseEntity.ok(4);
-        }        
+        }
+        if(user.isEmpty()){
+            user = b.getName();
+        }
         Double priceDay = b.getTotal() * noDay;
         int id = (int) Math.round(bookingServices.countFindAll());
 
@@ -245,7 +239,33 @@ public class BookingApiController {
     }
 
     @GetMapping("/room-home")
-    public ResponseEntity<?> roomForHome(){
-        return ResponseEntity.ok(1);
+    public ResponseEntity<?> roomForHome() throws ParseException{
+        Calendar calendar = Calendar.getInstance();
+        Date checkinDate = calendar.getTime();
+        calendar.add(Calendar.DATE, +10);
+        Date checkoutDate = calendar.getTime();
+        List<Room> rooms = quanLyPhongService.findValidRoomDeafult(checkinDate, checkoutDate);
+        List<RoomDto> roomDtos = rooms.stream().map(room -> {
+            RoomDto roomDto = new RoomDto();
+            roomDto.setMaPhong(room.getMaPhong());
+            roomDto.setGiaPhong(room.getGiaPhong());
+            roomDto.setSoPhong(room.getSoPhong());
+            roomDto.setTang(room.getTang());
+            roomDto.setTrangThai(room.getTrangThai());
+
+            RoomTypeDto roomTypeDto = new RoomTypeDto();
+            roomTypeDto.setMaLoaiPhong(room.getLoaiPhong().getMaLoaiPhong());
+            roomTypeDto.setTenLoaiPhong(room.getLoaiPhong().getTenLoaiPhong());
+            roomTypeDto.setMoTa(room.getLoaiPhong().getMoTa());
+
+            roomDto.setLoaiPhong(roomTypeDto);
+            roomDto.setGiaPhongGioDau(room.getGiaPhongGioDau());
+            roomDto.setHinhAnh("/hinh/phong/"+room.getHinhAnh());
+            roomDto.setKhuyenMai(room.getKhuyenMai());
+            roomDto.setTienNghi(room.getTienNghi());
+            roomDto.setGiaPhongGioSau(room.getGiaPhongGioSau());
+            return roomDto;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(roomDtos.subList(0,5));
     }
 }

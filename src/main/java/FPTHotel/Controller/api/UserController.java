@@ -131,6 +131,9 @@ public class UserController {
 
     @PostMapping("/feedback")
     public ResponseEntity<?> feedback(@RequestBody @ModelAttribute Feedback f ){
+        if(f.getCreatedBy().isEmpty()){
+            f.setCreatedBy(f.getHoTen());
+        }
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         Feedback feed = new Feedback();
         feed.setCreatedBy(f.getCreatedBy());
